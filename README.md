@@ -7,7 +7,7 @@
 
 ![Minecraft Agent Skills Bundle agent console banner](docs/assets/minecraft-agent-skills-banner.png)
 
-An original, owner-managed bundle of **18 Minecraft agent skills** for Codex,
+An original, owner-managed bundle of **Minecraft agent skills** for Codex,
 Claude Code, and plugin-based agent workflows. The bundle helps an AI agent route
 Minecraft tasks across Java server administration, Bedrock operations, plugin and
 mod development, datapacks, resource packs, crossplay, testing, release work, and

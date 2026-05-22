@@ -1,7 +1,7 @@
 # minecraft-codex-skills plugin
 
 `minecraft-codex-skills` is the installable plugin wrapper for the original
-`minecraft-agent-skills-bundle` repository. It packages the same 18 Minecraft
+`minecraft-agent-skills-bundle` repository. It packages the same Minecraft
 agent skills for Codex and Claude Code while preserving the plugin ID used by
 existing local marketplace installs.
 
@@ -40,7 +40,7 @@ is available.
    repository that contains `.agents/plugins/marketplace.json`.
 2. Start Codex from the repository root.
 3. Open `/plugins` and install `minecraft-codex-skills` from the repo marketplace.
-4. Confirm the installed plugin shows the 18 bundled skills.
+4. Confirm the installed plugin shows the bundled Minecraft skills.
 5. Reinstall or restart Codex if a local plugin edit does not appear
    immediately. Codex loads local marketplace installs from
    `~/.codex/plugins/cache/<marketplace>/<plugin>/local/`.
