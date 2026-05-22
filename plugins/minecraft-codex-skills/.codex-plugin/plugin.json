@@ -1,7 +1,7 @@
 {
   "name": "minecraft-codex-skills",
   "version": "1.0.0",
-  "description": "A dual-target Minecraft Java and Bedrock development skills bundle for Codex and Claude Code, with built-in image-generation workflows on Codex.",
+  "description": "A multi-host Minecraft Java and Bedrock development skills bundle for Codex, Claude Code, and compatible agent hosts, with image-generation workflows when the host supports them.",
   "author": {
     "name": "AIKUSAN",
     "url": "https://github.com/AIKUSAN"
@@ -27,8 +27,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Minecraft Codex Skills",
-    "shortDescription": "18 reusable Minecraft Java and Bedrock development and operations skills, plus built-in image-generation workflows on Codex.",
-    "longDescription": "Bundle modding, plugin-dev, datapack, commands, testing, CI/CD, world generation, resource pack, Java-to-Bedrock pack conversion, Java and Bedrock server admin, permissions, crossplay, WorldEdit ops, and EssentialsX ops skills in one installable package, with built-in image-generation workflows when running on Codex.",
+    "shortDescription": "Reusable Minecraft Java and Bedrock development and operations skills, plus host-supported image-generation workflows.",
+    "longDescription": "Bundle modding, plugin-dev, datapack, commands, testing, CI/CD, world generation, resource pack, Java-to-Bedrock pack conversion, Java and Bedrock server admin, permissions, crossplay, WorldEdit ops, and EssentialsX ops skills in one installable package, with image-generation workflows available when the host exposes image tools.",
     "developerName": "AIKUSAN",
     "category": "Productivity",
     "capabilities": [

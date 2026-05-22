@@ -1,6 +1,6 @@
 {
   "name": "minecraft-codex-skills",
-  "description": "A dual-target Minecraft Java and Bedrock development skills bundle for Claude Code and Codex; image-generation workflows are Codex-first and host-conditional.",
+  "description": "A multi-host Minecraft Java and Bedrock development skills bundle for Claude Code, Codex, and compatible agent hosts; image-generation workflows are available when the host supports them.",
   "version": "1.0.0",
   "author": {
     "name": "AIKUSAN",

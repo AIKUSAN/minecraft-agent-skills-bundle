@@ -55,6 +55,14 @@ function isHttpsUrl(value) {
   }
 }
 
+function describesHostSupportedImageGeneration(value) {
+  const text = String(value ?? "").toLowerCase();
+  return text.includes("image-generation")
+    && text.includes("workflow")
+    && text.includes("host")
+    && (text.includes("support") || text.includes("exposes"));
+}
+
 const pkg = readJson(PACKAGE_JSON);
 const packageLock = readJson(PACKAGE_LOCK);
 const codexManifest = readJson(CODEX_MANIFEST);
@@ -86,8 +94,8 @@ if (codexManifest) {
   if (codexManifest.name !== PLUGIN_NAME) addError(CODEX_MANIFEST, `expected name \`${PLUGIN_NAME}\``);
   if (codexManifest.version !== releaseVersion) addError(CODEX_MANIFEST, `expected version \`${releaseVersion}\``);
   if (codexManifest.skills !== "./skills/") addError(CODEX_MANIFEST, "expected `skills` to be `./skills/`");
-  if (!String(codexManifest.description ?? "").includes("image-generation workflows on Codex")) {
-    addError(CODEX_MANIFEST, "expected description to clarify that built-in image generation is on Codex");
+  if (!describesHostSupportedImageGeneration(codexManifest.description)) {
+    addError(CODEX_MANIFEST, "expected description to clarify host-supported image-generation workflows");
   }
 
   if (!isHttpsUrl(codexManifest.homepage)) addError(CODEX_MANIFEST, "expected `homepage` to be an https URL");
@@ -105,11 +113,11 @@ if (codexManifest) {
         addError(CODEX_MANIFEST, `expected interface.${field} to be a non-empty string`);
       }
     }
-    if (!iface.shortDescription.includes("image-generation workflows on Codex")) {
-      addError(CODEX_MANIFEST, "expected interface.shortDescription to clarify Codex image-generation support");
+    if (!describesHostSupportedImageGeneration(iface.shortDescription)) {
+      addError(CODEX_MANIFEST, "expected interface.shortDescription to clarify host-supported image-generation workflows");
     }
-    if (!iface.longDescription.includes("image-generation workflows")) {
-      addError(CODEX_MANIFEST, "expected interface.longDescription to mention image-generation workflow support");
+    if (!describesHostSupportedImageGeneration(iface.longDescription)) {
+      addError(CODEX_MANIFEST, "expected interface.longDescription to clarify host-supported image-generation workflows");
     }
 
     if (!Array.isArray(iface.capabilities) || iface.capabilities.length === 0) {
@@ -127,8 +135,8 @@ if (codexManifest) {
 if (claudeManifest) {
   if (claudeManifest.name !== PLUGIN_NAME) addError(CLAUDE_MANIFEST, `expected name \`${PLUGIN_NAME}\``);
   if (claudeManifest.version !== releaseVersion) addError(CLAUDE_MANIFEST, `expected version \`${releaseVersion}\``);
-  if (!String(claudeManifest.description ?? "").includes("Codex-first and host-conditional")) {
-    addError(CLAUDE_MANIFEST, "expected description to clarify that image-generation workflows are Codex-first and host-conditional");
+  if (!describesHostSupportedImageGeneration(claudeManifest.description)) {
+    addError(CLAUDE_MANIFEST, "expected description to clarify host-supported image-generation workflows");
   }
   if (!isHttpsUrl(claudeManifest.homepage)) addError(CLAUDE_MANIFEST, "expected `homepage` to be an https URL");
   if (!isHttpsUrl(claudeManifest.repository)) addError(CLAUDE_MANIFEST, "expected `repository` to be an https URL");
@@ -137,8 +145,8 @@ if (claudeManifest) {
 if (repositoryMetadata) {
   if (typeof repositoryMetadata.description !== "string" || repositoryMetadata.description.trim() === "") {
     addError(REPOSITORY_METADATA, "expected description to be a non-empty string");
-  } else if (!repositoryMetadata.description.includes("Codex-first image-generation workflows")) {
-    addError(REPOSITORY_METADATA, "expected description to clarify that image-generation workflows are Codex-first");
+  } else if (!repositoryMetadata.description.includes("Java and Bedrock") || !repositoryMetadata.description.includes("compatible agent hosts")) {
+    addError(REPOSITORY_METADATA, "expected description to describe Java and Bedrock coverage across compatible agent hosts");
   }
 }
 

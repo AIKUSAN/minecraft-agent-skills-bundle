@@ -47,7 +47,7 @@ table below is a router, not an exhaustive layout listing.
 - Use `minecraft-essentials-ops` for EssentialsX-specific commands, config, and permissions.
 - Use `minecraft-plugin-dev` when the task is writing Java plugin code rather than operating existing plugins.
 - Use `minecraft-imagegen` for raster art, thumbnails, pack icons, and concept textures; use `minecraft-resource-pack` when the task is final pack structure plus JSON/audio/shader implementation.
-- `minecraft-imagegen` also requires a host that exposes image generation; treat it as Codex-first unless the current agent explicitly supports an equivalent image tool.
+- `minecraft-imagegen` requires a host that exposes image generation; route it only when the current agent environment provides an equivalent image tool.
 
 ## Sync Model
 
