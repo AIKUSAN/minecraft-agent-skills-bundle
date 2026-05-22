@@ -11,19 +11,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added a conservative Java-to-Bedrock resource-pack conversion helper that creates `.mcpack` outputs, writes Bedrock `manifest.json`, copies simple texture assets, and reports unsupported Java-only assets
 - Added role-routing guidance for Minecraft Administrator and Minecraft Server Developer workflows across Java, Bedrock, permissions, crossplay, and pack conversion tasks
 - Added Java server admin marketplace/archetype references and a read-only server folder/zip analyzer for plugin inventory, dependency warnings, proxy hints, backups, worlds, and suspicious jar review
-- Added original README banner and square icon assets for the public `minecraft-agent-skills-bundle` repository
+- Added original Agent Console README banner, square icon, and How It Works workflow image assets for the public `minecraft-agent-skills-bundle` repository
 
 ### Changed
 
 - Expanded the bundle and plugin metadata from 13 to 18 skills, with Java and Bedrock coverage in README, AGENTS guidance, plugin docs, and repository metadata
 - Enhanced `minecraft-server-admin` as the Java server/plugin orchestrator for Paper, Purpur, Folia, Velocity, plugin marketplaces, server archetypes, compatibility planning, and existing server analysis
 - Rebranded public repository metadata and install links for `AIKUSAN/minecraft-agent-skills-bundle` while preserving the `minecraft-codex-skills` plugin identifier
+- Rewrote the root README and plugin README around the standalone, not-a-fork project identity, practical install paths, and skill routing groups
 - Fixed the Paper plugin layout validator so dotted Java main classes resolve to slash-separated source paths during fixture validation
 - Made multiloader and worldgen validator scripts portable to the default macOS Bash 3.2 shell
 - Hardened the validator fixture harness so expected-pass fixtures preserve failing child-command statuses instead of reporting green after internal validator failures
 - Made bundled datapack, resource-pack, and worldgen validators tolerate CRLF-affected `jq -r` output on Windows/Git Bash by stripping trailing carriage returns before resolving references
 - Refactored `minecraft-plugin-dev` runtime guidance into a leaner `SKILL.md` plus `references/runtime-patterns.md` for scheduler, Folia, PDC, Adventure, YAML config, Vault, and Paper-specific API examples
-- Rebuilt the README workflow SVG with cleaner margins, accessible metadata, stronger typography, and a more restrained Minecraft-adjacent palette
+- Replaced the README workflow SVG with a generated original PNG workflow diagram and refreshed the public README asset references
 
 ## [2.4.2] - 2026-05-04
 
