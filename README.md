@@ -83,7 +83,7 @@ smallest useful skill set, and split larger tasks across focused skill surfaces.
 True sub-agent spawning depends on the host runtime, but the skill descriptions
 and routing docs are written to support delegation when the runtime provides it.
 
-![Original How It Works workflow diagram](docs/assets/how-it-works.png)
+![Generated polished How It Works workflow diagram](docs/assets/how-it-works.png)
 
 | Work area | Skills to route |
 |---|---|
