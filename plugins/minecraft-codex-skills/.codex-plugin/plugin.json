@@ -1,6 +1,6 @@
 {
   "name": "minecraft-codex-skills",
-  "version": "2.5.0",
+  "version": "1.0.0",
   "description": "A dual-target Minecraft Java and Bedrock development skills bundle for Codex and Claude Code, with built-in image-generation workflows on Codex.",
   "author": {
     "name": "AIKUSAN",
