@@ -1,0 +1,4 @@
+name: LuckPerms
+version: 5.5.0
+main: net.luckperms.bukkit.loader.BukkitLoaderPlugin
+api-version: 1.21

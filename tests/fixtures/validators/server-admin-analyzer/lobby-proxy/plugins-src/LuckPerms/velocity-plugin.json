@@ -1,0 +1,6 @@
+{
+  "id": "luckperms",
+  "name": "LuckPerms",
+  "version": "5.5.0",
+  "main": "net.luckperms.velocity.LPVelocityBootstrap"
+}

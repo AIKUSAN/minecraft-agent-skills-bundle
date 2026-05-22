@@ -1,0 +1,5 @@
+name: EssentialsX
+version: 2.21.0
+main: com.earth2me.essentials.Essentials
+api-version: 1.21
+softdepend: [Vault, LuckPerms]

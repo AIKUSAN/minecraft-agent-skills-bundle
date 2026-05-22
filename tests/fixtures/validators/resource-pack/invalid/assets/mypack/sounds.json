@@ -1,0 +1,7 @@
+{
+  "entity.test": {
+    "sounds": [
+      "mypack:entity/missing"
+    ]
+  }
+}

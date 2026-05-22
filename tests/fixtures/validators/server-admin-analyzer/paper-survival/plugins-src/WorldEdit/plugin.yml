@@ -1,0 +1,4 @@
+name: WorldEdit
+version: 7.3.10
+main: com.sk89q.worldedit.bukkit.WorldEditPlugin
+api-version: 1.21

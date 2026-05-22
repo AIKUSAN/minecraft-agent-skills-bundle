@@ -1,0 +1,4 @@
+name: BadPlugin
+version: 1.0.0
+main: com.example.plugin.MissingMain
+api-version: 'latest'

@@ -1,0 +1,49 @@
+{
+  "name": "minecraft-codex-skills",
+  "version": "2.5.0",
+  "description": "A dual-target Minecraft Java and Bedrock development skills bundle for Codex and Claude Code, with built-in image-generation workflows on Codex.",
+  "author": {
+    "name": "AIKUSAN",
+    "url": "https://github.com/AIKUSAN"
+  },
+  "homepage": "https://github.com/AIKUSAN/minecraft-agent-skills-bundle",
+  "repository": "https://github.com/AIKUSAN/minecraft-agent-skills-bundle",
+  "license": "MIT",
+  "keywords": [
+    "minecraft",
+    "skills",
+    "codex",
+    "claude",
+    "neoforge",
+    "fabric",
+    "paper",
+    "bedrock",
+    "geyser",
+    "permissions",
+    "resource-pack",
+    "pack-conversion",
+    "image-generation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Minecraft Codex Skills",
+    "shortDescription": "18 reusable Minecraft Java and Bedrock development and operations skills, plus built-in image-generation workflows on Codex.",
+    "longDescription": "Bundle modding, plugin-dev, datapack, commands, testing, CI/CD, world generation, resource pack, Java-to-Bedrock pack conversion, Java and Bedrock server admin, permissions, crossplay, WorldEdit ops, and EssentialsX ops skills in one installable package, with built-in image-generation workflows when running on Codex.",
+    "developerName": "AIKUSAN",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/AIKUSAN/minecraft-agent-skills-bundle",
+    "privacyPolicyURL": "https://github.com/AIKUSAN/minecraft-agent-skills-bundle/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/AIKUSAN/minecraft-agent-skills-bundle/blob/main/TERMS.md",
+    "defaultPrompt": [
+      "Use Minecraft Codex Skills to scaffold a NeoForge 1.21.11 mod with data generation.",
+      "Use Minecraft Codex Skills to plan Bedrock Dedicated Server access, pack deployment, and backup operations.",
+      "Use Minecraft Codex Skills to convert a Java resource pack into a Bedrock .mcpack with a conversion report.",
+      "Use Minecraft Codex Skills to generate pack art or concept textures for a resource-pack update."
+    ],
+    "brandColor": "#5a8f2c"
+  }
+}

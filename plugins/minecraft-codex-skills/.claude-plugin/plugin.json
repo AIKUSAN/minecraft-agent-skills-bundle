@@ -1,0 +1,12 @@
+{
+  "name": "minecraft-codex-skills",
+  "description": "A dual-target Minecraft Java and Bedrock development skills bundle for Claude Code and Codex; image-generation workflows are Codex-first and host-conditional.",
+  "version": "2.5.0",
+  "author": {
+    "name": "AIKUSAN",
+    "url": "https://github.com/AIKUSAN"
+  },
+  "homepage": "https://github.com/AIKUSAN/minecraft-agent-skills-bundle",
+  "repository": "https://github.com/AIKUSAN/minecraft-agent-skills-bundle",
+  "license": "MIT"
+}

@@ -1,0 +1,5 @@
+name: Vault
+version: 1.7.4
+main: net.milkbowl.vault.Vault
+api-version: 1.21
+softdepend: [EssentialsX]

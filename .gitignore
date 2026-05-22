@@ -1,0 +1,34 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Secrets and local environment
+.env
+.env.*
+.secrets
+.secrets.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+
+# This repo intentionally versions compatibility mirrors in these root folders.
+# Keep them includable even if contributors have global ignore rules for .codex/.claude.
+!/.codex/
+!/.codex/**
+!/.claude/
+!/.claude/**

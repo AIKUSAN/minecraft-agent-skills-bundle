@@ -1,0 +1,5 @@
+name: ArenaGame
+version: 1.0.0
+main: example.arena.ArenaGamePlugin
+api-version: 1.21
+depend: [WorldEdit, Vault]
