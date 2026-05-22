@@ -1,0 +1,73 @@
+name: Skills Audit
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Ensure jq
+        run: |
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+          jq --version
+
+      - name: Validate mirror sync
+        run: ./scripts/sync-skills-layout.sh check
+
+      - name: Validate plugin bundle
+        run: node ./scripts/validate-plugin-bundle.mjs
+
+      - name: Run skill audit
+        run: node ./scripts/audit-skills.mjs
+
+      - name: Validate documentation snippets
+        run: node ./scripts/validate-doc-snippets.mjs
+
+      - name: Run validator fixture tests
+        run: ./scripts/run-skill-validator-fixtures.sh
+
+      - name: Run repo policy fixtures
+        run: ./scripts/test-repo-policy-fixtures.sh
+
+      - name: Validate workflow action pinning
+        run: node ./scripts/check-workflow-action-pins.mjs
+
+      - name: Validate GitHub community files
+        run: node ./scripts/check-github-community-files.mjs
+
+      - name: Run markdown lint
+        run: npm run lint:md
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
