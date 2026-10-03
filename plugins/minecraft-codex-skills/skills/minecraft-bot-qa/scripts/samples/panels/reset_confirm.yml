@@ -1,0 +1,17 @@
+title: Reset Progress
+subtitle: This cannot be undone.
+layout:
+  0: [confirm, cancel]
+items:
+  confirm:
+    material: TNT
+    name: Confirm Reset
+    actions:
+      commands:
+        - "[msg] Progress reset."
+  cancel:
+    material: ARROW
+    name: Cancel
+    actions:
+      commands:
+        - "[open] main_menu"

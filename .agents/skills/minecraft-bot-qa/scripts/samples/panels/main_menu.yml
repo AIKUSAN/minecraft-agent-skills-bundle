@@ -1,0 +1,38 @@
+# Sample CommandPanels-style menu used by the built-in self-test. Replace with your own panels via PANEL_DIR.
+title: Server Menu
+subtitle: Welcome, %player_name%. Pick an option.
+layout:
+  0: [rules, help]
+  1: [spawn, reset]
+  2: [close]
+items:
+  rules:
+    material: BOOK
+    name: Server Rules
+    actions:
+      commands:
+        - "[open] rules_menu"
+  help:
+    material: COMPASS
+    name: How To Play
+    actions:
+      commands:
+        - "[open] help_menu"
+  spawn:
+    material: ENDER_PEARL
+    name: Return To Spawn
+    actions:
+      commands:
+        - "[msg] Teleporting you back to spawn."
+  reset:
+    material: BARRIER
+    name: Reset Progress
+    actions:
+      commands:
+        - "[open] reset_confirm"
+  close:
+    material: RED_WOOL
+    name: Close
+    actions:
+      commands:
+        - "[close]"

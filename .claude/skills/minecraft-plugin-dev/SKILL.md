@@ -21,6 +21,9 @@ description: "Develop Minecraft server plugins using the Paper/Bukkit/Spigot API
 - `Use when`: the target is server-side Paper/Bukkit/Spigot plugin behavior with JavaPlugin APIs.
 - `Do not use when`: the task requires client-side installable mods or loader APIs (`minecraft-modding` / `minecraft-multiloader`).
 - `Do not use when`: the task is pure vanilla datapack/command content (`minecraft-datapack` / `minecraft-commands-scripting`).
+- `Do not use when`: the task is a Bedrock add-on or Script API pack (`minecraft-bedrock-addon-dev`).
+- `Do not use when`: the task is installing, configuring or operating an existing plugin (`minecraft-server-admin`, `minecraft-permissions-admin`, `minecraft-essentials-ops`).
+- `Do not use when`: the task is writing automated tests (`minecraft-testing`) or release pipelines (`minecraft-ci-release`).
 
 ## Bundled References
 

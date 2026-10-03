@@ -11,6 +11,7 @@ description: "Create, edit, and debug Minecraft vanilla datapacks for 1.21.x. Co
 - `Use when`: the deliverable is datapack files (`pack.mcmeta`, `data/...`) and `.mcfunction`/JSON content.
 - `Do not use when`: the request is command-only snippets not tied to a datapack file tree (`minecraft-commands-scripting`).
 - `Do not use when`: the request requires loader APIs, Java code, or runtime mod behavior (`minecraft-modding`).
+- `Do not use when`: the content is biomes, dimensions, structures, noise settings or surface rules (`minecraft-world-generation`).
 
 ---
 

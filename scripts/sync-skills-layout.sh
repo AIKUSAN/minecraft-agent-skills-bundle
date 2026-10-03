@@ -4,6 +4,8 @@ set -euo pipefail
 CANONICAL_DIR=".agents/skills"
 CANONICAL_INDEX="$CANONICAL_DIR/README.md"
 MIRROR_DIRS=(".codex/skills" ".claude/skills" "plugins/minecraft-codex-skills/skills")
+AGENTS_DIR=".agents/agents"
+AGENT_MIRROR_DIRS=(".claude/agents" "plugins/minecraft-codex-skills/agents")
 MODE="${1:-sync}"
 
 if [[ ! -d "$CANONICAL_DIR" ]]; then
@@ -30,6 +32,13 @@ case "$MODE" in
       fi
       echo "[PASS] Synced $CANONICAL_DIR -> $MIRROR_DIR"
     done
+    if [[ -d "$AGENTS_DIR" ]]; then
+      for MIRROR_DIR in "${AGENT_MIRROR_DIRS[@]}"; do
+        mkdir -p "$MIRROR_DIR"
+        rsync -a --delete "$AGENTS_DIR/" "$MIRROR_DIR/"
+        echo "[PASS] Synced $AGENTS_DIR -> $MIRROR_DIR"
+      done
+    fi
     if [[ "$FAILED" -ne 0 ]]; then
       exit 1
     fi
@@ -55,6 +64,23 @@ case "$MODE" in
         echo "[PASS] $CANONICAL_DIR and $MIRROR_DIR are in sync"
       fi
     done
+    if [[ -d "$AGENTS_DIR" ]]; then
+      for MIRROR_DIR in "${AGENT_MIRROR_DIRS[@]}"; do
+        if [[ ! -d "$MIRROR_DIR" ]]; then
+          echo "[FAIL] Agent mirror directory missing: $MIRROR_DIR" >&2
+          FAILED=1
+          continue
+        fi
+        DIFF_OUTPUT="$(rsync -rlpcni --delete "$AGENTS_DIR/" "$MIRROR_DIR/")"
+        if [[ -n "$DIFF_OUTPUT" ]]; then
+          echo "[FAIL] Agent mirror drift detected between $AGENTS_DIR and $MIRROR_DIR" >&2
+          echo "$DIFF_OUTPUT" >&2
+          FAILED=1
+        else
+          echo "[PASS] $AGENTS_DIR and $MIRROR_DIR are in sync"
+        fi
+      done
+    fi
     if [[ "$FAILED" -ne 0 ]]; then
       exit 1
     fi

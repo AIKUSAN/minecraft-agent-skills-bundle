@@ -14,6 +14,7 @@ unless the user explicitly asks for them.
 ### Routing Boundaries
 - `Use when`: the task is BDS setup, configuration, user access, world/resource deployment, backups, networking, or production operations.
 - `Do not use when`: the task is Java Edition server operations (`minecraft-server-admin`), Bedrock add-on code (`minecraft-bedrock-addon-dev`), Java plugin development (`minecraft-plugin-dev`), or Java-to-Bedrock pack conversion (`minecraft-resource-pack-conversion`).
+- `Do not use when`: the task is Geyser/Floodgate crossplay on a Java server (`minecraft-crossplay-ops`) or LuckPerms policy (`minecraft-permissions-admin`).
 
 ## Operating Model
 

@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Bedrock Quest Bot</title>
+<style>
+body{margin:0;font:13px/1.4 system-ui,sans-serif;background:#12141a;color:#dde;display:grid;grid-template-columns:1fr 360px;height:100vh}
+#feed{overflow:auto;padding:8px 12px}#side{border-left:1px solid #2a2e3a;overflow:auto;padding:8px 12px}
+.ev{padding:2px 0;border-bottom:1px solid #1d212b;white-space:pre-wrap}.t{color:#778;margin-right:6px}
+.chat{color:#9fe}.title{color:#fc6}.form{color:#8bf}.act{color:#9d9}.error,.disconnect,.close{color:#f77}.toast{color:#fa8}.add_player,.add_entity{color:#99a}
+h3{margin:10px 0 4px;color:#9ab}button{background:#2a3350;color:#dde;border:0;padding:4px 8px;margin:2px;border-radius:4px;cursor:pointer}
+pre{margin:0;white-space:pre-wrap}.btn{display:block;text-align:left}
+</style></head><body>
+<div id="feed"></div>
+<div id="side"><div id="stat"></div><h3>Current form</h3><div id="form">-</div><h3>Inventory</h3><div id="inv"></div><h3>Nearby</h3><pre id="near"></pre></div>
+<script>
+const feed=document.getElementById('feed');
+const skip=new Set(['me_move','slot']);
+function fmt(e){const {n,t,type,...r}=e;return `<div class="ev ${type}"><span class="t">${(t/1000).toFixed(1)}s</span><b>${type}</b> ${esc(JSON.stringify(r))}</div>`}
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+const es=new EventSource('/events');
+es.onmessage=m=>{const e=JSON.parse(m.data);if(skip.has(e.type))return;const near=feed.scrollTop+feed.clientHeight>=feed.scrollHeight-40;feed.insertAdjacentHTML('beforeend',fmt(e));if(near)feed.scrollTop=feed.scrollHeight};
+async function dd(c){await fetch('/do?c='+encodeURIComponent(c))}
+async function poll(){try{const s=await (await fetch('/state')).json();
+document.getElementById('stat').innerHTML=`<b>${s.connected?'connected':'DISCONNECTED'}</b> pos ${s.pos?s.pos.x+', '+s.pos.y+', '+s.pos.z:'?'}<br>held: ${s.heldItem||'-'} (slot ${s.hotbar})`;
+document.getElementById('inv').innerHTML=s.inv.map(i=>`${i.slot}: ${i.name} x${i.count}`).join('<br>');
+const f=s.form;document.getElementById('form').innerHTML=f?`<b>${esc(f.title||'')}</b><br>${esc(f.content||'')}<br>`+(f.buttons.length?f.buttons.map((b,i)=>`<button class="btn" onclick="dd('form ${i}')">${i}: ${esc(b)}</button>`).join(''):`<button onclick="dd('form 0')">${esc(f.b1||'yes')}</button><button onclick="dd('form 1')">${esc(f.b2||'no')}</button>`)+`<button onclick="dd('form close')">close</button>`:'-';
+const n=await (await fetch('/do?c=nearby%2012')).json();document.getElementById('near').textContent=n.results[0].r.map(e=>`${e.d} ${e.name||e.type||e.kind} #${e.rid}`).join('\n');
+}catch(e){}setTimeout(poll,1500)}poll();
+</script></body></html>

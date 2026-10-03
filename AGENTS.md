@@ -1,8 +1,9 @@
 # AGENTS.md — minecraft-agent-skills-bundle Repository
 
-This repository is a collection of **18 AI agent skills**: 17 Minecraft
-development/operations skills plus one Minecraft image-generation skill, along
-with a dual-target plugin bundle for Codex and Claude Code.
+This repository is a collection of **20 AI agent skills**: 19 Minecraft
+development/operations skills (including a task router) plus one Minecraft
+image-generation skill, along with five specialist subagent definitions and a
+dual-target plugin bundle for Codex and Claude Code.
 It is NOT itself a Minecraft project — it contains skill files and plugin packaging
 that get copied into Minecraft mod, plugin, or server-admin projects.
 
@@ -36,6 +37,10 @@ other skills in this repo also include `references/` and `scripts/` support asse
 ├── minecraft-testing/
 │   └── SKILL.md
 ├── minecraft-ci-release/
+│   └── SKILL.md
+├── minecraft-bot-qa/
+│   └── SKILL.md
+├── minecraft-task-router/
 │   └── SKILL.md
 ├── minecraft-world-generation/
 │   └── SKILL.md
@@ -106,6 +111,10 @@ Compatibility mirror (kept in sync by script/CI):
 │   └── SKILL.md
 ├── minecraft-ci-release/         ← GitHub Actions, Modrinth/CurseForge publishing
 │   └── SKILL.md
+├── minecraft-bot-qa/             ← Java + Bedrock bot playthrough QA, Laya second opinion
+│   └── SKILL.md
+├── minecraft-task-router/        ← Multi-skill routing and subagent delegation
+│   └── SKILL.md
 ├── minecraft-world-generation/   ← Custom biomes, dimensions, structures
 │   └── SKILL.md
 ├── minecraft-resource-pack/      ← Textures, models, sounds, shaders
@@ -173,6 +182,10 @@ Claude Code mirror (kept in sync by script/CI):
 │   └── SKILL.md
 ├── minecraft-ci-release/         ← GitHub Actions, Modrinth/CurseForge publishing
 │   └── SKILL.md
+├── minecraft-bot-qa/             ← Java + Bedrock bot playthrough QA, Laya second opinion
+│   └── SKILL.md
+├── minecraft-task-router/        ← Multi-skill routing and subagent delegation
+│   └── SKILL.md
 ├── minecraft-world-generation/   ← Custom biomes, dimensions, structures
 │   └── SKILL.md
 ├── minecraft-resource-pack/      ← Textures, models, sounds, shaders
@@ -228,6 +241,8 @@ plugins/minecraft-codex-skills/
     ├── minecraft-multiloader/
     ├── minecraft-testing/
     ├── minecraft-ci-release/
+    ├── minecraft-bot-qa/
+    ├── minecraft-task-router/
     ├── minecraft-world-generation/
     ├── minecraft-resource-pack/
     ├── minecraft-resource-pack-conversion/
@@ -243,8 +258,11 @@ plugins/minecraft-codex-skills/
 
 ## Skill Selection Guide
 
-Codex selects skills automatically from the `description` field in each `SKILL.md`.
-The table below maps task types to which skill(s) to load:
+The host selects skills automatically from the `description` field in each `SKILL.md`.
+The table below maps task types to which skill(s) to load. When a request needs
+more than one skill, or the platform is unclear, load `minecraft-task-router`
+first. It applies the tie-breaker rules and delegates to the specialist subagents
+below.
 
 |Task type|Skill to use|
 |---|---|
@@ -255,6 +273,8 @@ The table below maps task types to which skill(s) to load:
 |Single code base targeting both NeoForge and Fabric|`minecraft-multiloader`|
 |Unit tests, MockBukkit, NeoForge GameTests, Fabric GameTests|`minecraft-testing`|
 |GitHub Actions CI, Modrinth/CurseForge auto-publish, semantic versioning|`minecraft-ci-release`|
+|Bot playthroughs of a live dev server (Java and Bedrock), menu and NPC walkthroughs, judge reports|`minecraft-bot-qa`|
+|Request that spans several skills, or unclear Java vs Bedrock target|`minecraft-task-router`|
 |Custom biomes, dimensions, structures (datapack or mod)|`minecraft-world-generation`|
 |Texture packs, block/item models, animated textures, shaders|`minecraft-resource-pack`|
 |Convert Java resource packs into Bedrock `.mcpack` files|`minecraft-resource-pack-conversion`|
@@ -267,16 +287,39 @@ The table below maps task types to which skill(s) to load:
 |WorldEdit selections, schematics, brushes, safe rollback workflows|`minecraft-worldedit-ops`|
 |EssentialsX commands, economy, kits/warps/homes, moderation and permissions|`minecraft-essentials-ops`|
 
+## Subagents and delegation
+
+Specialist subagents live in `.agents/agents/` and are mirrored to
+`.claude/agents/` and `plugins/minecraft-codex-skills/agents/`. Claude Code
+discovers the plugin copy automatically. Other hosts can read the same files as
+role descriptions.
+
+|Subagent|Skills it loads|
+|---|---|
+|`minecraft-java-ops`|`minecraft-server-admin`, `minecraft-permissions-admin`, `minecraft-essentials-ops`, `minecraft-worldedit-ops`|
+|`minecraft-bedrock-ops`|`minecraft-bedrock-server-admin`, `minecraft-crossplay-ops`|
+|`minecraft-code-dev`|`minecraft-plugin-dev`, `minecraft-modding`, `minecraft-multiloader`, `minecraft-bedrock-addon-dev`|
+|`minecraft-content-author`|`minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation`, `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen`|
+|`minecraft-qa-release`|`minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release`|
+
+Rules:
+
+- The router and any coordinator (`minecraft-server-admin` in the main agent) run in the main thread. Subagents are leaves and never start other subagents.
+- Each subagent has a least-privilege `tools` allowlist that leaves out the Agent tool, so the leaf rule is enforced and not just stated.
+- Every skill belongs to exactly one subagent. `npm run check:routing` enforces this, along with router coverage and role routing.
+- Hosts without subagents follow the same plan one skill at a time.
+
 ## When working in this repository
 
 - **Do not** run Minecraft, Gradle, or Paper server commands here; there is no game project to build.
-- Edit `.agents/skills/` only; sync mirrors and the plugin bundle after canonical changes.
+- Edit `.agents/skills/` and `.agents/agents/` only; sync mirrors and the plugin bundle after canonical changes.
 - When editing skill files, keep examples accurate for **Minecraft 1.21.x**.
 - Keep Java examples correct for **Java 21** and verify changed examples in their target project context.
 - Keep JSON snippets valid and pretty-printed with 2-space indentation.
 - Mark platform-specific patterns (NeoForge / Fabric / Paper) clearly.
 - Prefer complete, runnable code snippets over pseudo-code.
-- Skills are independent — do not create cross-skill dependencies.
+- Skills never read or import each other's files, so each one works when copied alone. They may name other skills in `Routing Boundaries`, and handoffs between skills go through `minecraft-task-router` and the subagents above.
+- Keep `.agents/agents/` in sync with the skills: a new skill needs a row in the router table and an owner in exactly one subagent (`npm run check:routing`).
 
 ## Updating for new Minecraft versions
 
@@ -299,6 +342,7 @@ When Minecraft releases a new version, update the following files:
 15. **`minecraft-multiloader/SKILL.md`** — Architectury, Fabric loader, NeoForge versions
 16. **`minecraft-worldedit-ops/SKILL.md`** — command workflow or safety behavior changes
 17. **`minecraft-essentials-ops/SKILL.md`** — EssentialsX command/config/permission behavior changes
+18. **`minecraft-bot-qa/SKILL.md`** — bot library versions (mineflayer, bedrock-protocol, Laya), Node requirement, and Geyser behavior notes
 
 ## Repo Notes
 

@@ -23,6 +23,7 @@ before writing any mod-specific code.
 - `Use when`: the task is Java/Kotlin mod code, registry/event work, networking, datagen wiring, and loader APIs.
 - `Do not use when`: the task is command-only vanilla logic (`minecraft-commands-scripting`) or pure datapacks (`minecraft-datapack`).
 - `Do not use when`: the task targets Paper/Bukkit plugins (`minecraft-plugin-dev`).
+- `Do not use when`: one codebase must ship on both NeoForge and Fabric (`minecraft-multiloader`).
 
 ---
 

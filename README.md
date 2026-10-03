@@ -10,8 +10,9 @@
 An original, owner-managed bundle of **Minecraft agent skills** for Codex,
 Claude Code, and plugin-based agent workflows. The bundle helps an AI agent route
 Minecraft tasks across Java server administration, Bedrock operations, plugin and
-mod development, datapacks, resource packs, crossplay, testing, release work, and
-generated asset planning.
+mod development, datapacks, resource packs, crossplay, testing, bot playthrough QA
+on Java and Bedrock, release work, and generated asset planning. Multi-step
+requests are split across specialist subagents where the host supports them.
 
 This repository is a standalone project and **not a fork** of another Minecraft
 skills repo. The public repository name is `minecraft-agent-skills-bundle`; the
@@ -51,7 +52,9 @@ cp -R .agents /path/to/your/project/
 ```
 
 Codex can read `.agents/skills/` directly. The `.codex/skills/` mirror is kept
-byte-for-byte aligned for hosts that prefer that layout.
+byte-for-byte aligned for hosts that prefer that layout. The copied `.agents/agents/`
+folder holds the specialist role descriptions. Codex has no subagent files, so it
+follows the router's plan one skill at a time.
 
 ### Codex local plugin
 
@@ -62,7 +65,8 @@ byte-for-byte aligned for hosts that prefer that layout.
 
 ### Claude Code raw skills
 
-Copy the Claude mirror into a Claude Code project:
+Copy the Claude mirror into a Claude Code project. It includes `.claude/skills/`
+and the five specialist subagents in `.claude/agents/`:
 
 ```bash
 cp -R .claude /path/to/your/project/
@@ -76,12 +80,46 @@ Run Claude Code against the bundled plugin directory:
 claude --plugin-dir ./plugins/minecraft-codex-skills
 ```
 
+The plugin ships the skills and the five subagents (`agents/`). Claude Code shows
+plugin skills with the plugin name as a prefix, for example
+`minecraft-codex-skills:minecraft-bot-qa`.
+
+## Bot QA Quick Start
+
+`minecraft-bot-qa` joins a dev server as a Java (Mineflayer) or Bedrock
+(bedrock-protocol through Geyser) player, walks NPC dialogue, clicks menus, logs
+everything, and judges the result. Fixed assertions decide pass or fail. The Laya
+model is an optional second opinion.
+
+Requirements: Node 20+ for the Java bots, Node 24+ for the Bedrock bots, and
+Python 3 for the judges. Laya is optional (`pip install -r requirements.txt`).
+
+```bash
+npm install --prefix ./.agents/skills/minecraft-bot-qa/scripts
+node ./.agents/skills/minecraft-bot-qa/scripts/check-bot-setup.mjs --selftest
+```
+
+If the install fails while building the native RakNet module (no C++ compiler),
+run `npm install --ignore-scripts --prefix ./.agents/skills/minecraft-bot-qa/scripts`
+instead. The Bedrock bots then use the pure-JavaScript backend.
+
+If the install fails while building the native RakNet module (no C++ compiler), run
+`npm install --ignore-scripts --prefix ./.agents/skills/minecraft-bot-qa/scripts` instead. The
+Bedrock bots then use a pure JavaScript backend.
+
+The self-test runs offline against a mock Bedrock server. Point the bots at a dev
+or staging server only, and use throwaway accounts. Sign-in caches stay out of Git.
+See `.agents/skills/minecraft-bot-qa/SKILL.md` for the full workflows.
+
 ## Skill Routing
 
-The bundle is designed so the host agent can inspect a user prompt, select the
-smallest useful skill set, and split larger tasks across focused skill surfaces.
-True sub-agent spawning depends on the host runtime, but the skill descriptions
-and routing docs are written to support delegation when the runtime provides it.
+A request that fits one skill loads that skill directly. A request that spans
+several skills, or does not say whether it targets Java or Bedrock, starts with
+`minecraft-task-router`. The router classifies the request, applies tie-breaker
+rules between overlapping skills, orders the work (analysis, backup, staging,
+verification, rollout) and hands each part to a specialist subagent. Claude Code
+picks up the five subagents from the plugin automatically. Hosts without
+subagents follow the same plan one skill at a time.
 
 ![Generated polished How It Works workflow diagram](docs/assets/how-it-works.png)
 
@@ -92,7 +130,8 @@ and routing docs are written to support delegation when the runtime provides it.
 | Server and mod development | `minecraft-plugin-dev`, `minecraft-modding`, `minecraft-multiloader`, `minecraft-bedrock-addon-dev` |
 | Vanilla and content systems | `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation` |
 | Resource packs and conversion | `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen` |
-| Quality and release | `minecraft-testing`, `minecraft-ci-release` |
+| Quality and release | `minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release` |
+| Multi-skill requests | `minecraft-task-router` |
 
 ## Skills Catalog
 
@@ -115,43 +154,68 @@ and routing docs are written to support delegation when the runtime provides it.
 | `minecraft-resource-pack-conversion` | Java-to-Bedrock resource-pack conversion with `.mcpack` output and unsupported asset reports |
 | `minecraft-imagegen` | Pack icons, server banners, promo images, concept textures, thumbnails, and visual briefs |
 | `minecraft-testing` | JUnit 5, MockBukkit, GameTests, fixtures, CI checks, and regression test planning |
+| `minecraft-task-router` | Routes requests that span several skills: classifies, breaks ties, orders the work with safety gates, delegates to specialist subagents, and merges the results |
+| `minecraft-bot-qa` | Bot playthroughs of a live dev server on Java (Mineflayer) and Bedrock (bedrock-protocol via Geyser), NPC and menu walkthroughs, structured logs, and judge reports with an optional Laya second opinion |
 | `minecraft-ci-release` | GitHub Actions, Modrinth and CurseForge publishing, release notes, versioning, and artifact checks |
 
 ## Example Prompts
 
+Each prompt starts in a different host. Pick the one you use.
+
+Codex:
+
 ```bash
 codex "Generate a docker-compose.yml for a Paper 1.21.11 server with Aikar JVM flags, persistent volumes, backups, and auto-restart."
-```
 
-```bash
 codex "Analyze this Paper server folder, identify installed plugins, flag missing dependencies, and recommend a survival SMP plugin stack."
-```
 
-```bash
 codex "Convert this Java resource pack into a Bedrock .mcpack, then report custom models or OptiFine-only assets that need manual review."
-```
 
-```bash
 codex "Create a Bedrock behavior pack with a Script API welcome message, matching manifests, and deployment notes for Bedrock Dedicated Server."
+
+codex "Build a Paper plugin that gives players a temporary speed boost when they eat a golden apple, with a cooldown stored in PDC."
+
+codex "Plan a Velocity network with Geyser and Floodgate for Bedrock players, LuckPerms staff groups, and a staging rollout with backups."
+
+codex "Join my dev server with a Java bot and a Bedrock bot, click every menu button, and report what is broken. Use throwaway accounts on the dev server only."
 ```
 
+Claude Code (with the plugin; drop `--plugin-dir` if you copied `.claude/` into your project):
+
 ```bash
-codex "Build a Paper plugin that gives players a temporary speed boost when they eat a golden apple, with a cooldown stored in PDC."
+claude --plugin-dir ./plugins/minecraft-codex-skills "Generate a docker-compose.yml for a Paper 1.21.11 server with Aikar JVM flags, persistent volumes, backups, and auto-restart."
+
+claude --plugin-dir ./plugins/minecraft-codex-skills "Analyze this Paper server folder, identify installed plugins, flag missing dependencies, and recommend a survival SMP plugin stack."
+
+claude --plugin-dir ./plugins/minecraft-codex-skills "Convert this Java resource pack into a Bedrock .mcpack, then report custom models or OptiFine-only assets that need manual review."
+
+claude --plugin-dir ./plugins/minecraft-codex-skills "Create a Bedrock behavior pack with a Script API welcome message, matching manifests, and deployment notes for Bedrock Dedicated Server."
+
+claude --plugin-dir ./plugins/minecraft-codex-skills "Build a Paper plugin that gives players a temporary speed boost when they eat a golden apple, with a cooldown stored in PDC."
+
+claude --plugin-dir ./plugins/minecraft-codex-skills "Plan a Velocity network with Geyser and Floodgate for Bedrock players, LuckPerms staff groups, and a staging rollout with backups."
+
+claude --plugin-dir ./plugins/minecraft-codex-skills "Join my dev server with a Java bot and a Bedrock bot, click every menu button, and report what is broken. Use throwaway accounts on the dev server only."
 ```
+
+The last two prompts span several skills, so they start with `minecraft-task-router`. In Claude Code it hands each part to a specialist subagent. In Codex it runs the same plan one skill at a time.
 
 ## Repository Layout
 
 ```text
 .agents/skills/                         canonical skill source
+.agents/agents/                         canonical subagent definitions
 .codex/skills/                          Codex compatibility mirror
 .claude/skills/                         Claude Code compatibility mirror
-plugins/minecraft-codex-skills/skills/  plugin mirror
+.claude/agents/                         Claude Code subagent mirror
+plugins/minecraft-codex-skills/skills/  plugin skills mirror
+plugins/minecraft-codex-skills/agents/  plugin subagents mirror
 docs/assets/                            original README and branding assets
 scripts/                                sync, audit, validation, and fixture helpers
 tests/fixtures/                         validator fixtures
 ```
 
-Edit canonical skill content in `.agents/skills/`, then sync mirrors:
+Edit canonical skill and subagent content in `.agents/`, then sync mirrors:
 
 ```bash
 bash ./scripts/sync-skills-layout.sh sync
@@ -171,6 +235,8 @@ Targeted checks are also available:
 
 ```bash
 npm run audit:skills
+npm run check:routing
+npm run check:bot-kit
 npm run test:docs
 npm run test:validators
 npm run check:plugin-bundle
@@ -188,6 +254,7 @@ npm run lint:md
 |Bedrock add-ons / Script API|1.21.x|—|
 |Vanilla datapack|1.21–1.21.11 (formats 48–94.1; `min_format` / `max_format` from 1.21.9+)|—|
 |Resource pack|1.21–1.21.11 (formats 34–75.0; `min_format` / `max_format` from 1.21.9+)|—|
+|Bot QA kit (Java bots / Bedrock bots)|Mineflayer / bedrock-protocol 3.60 (Node 20+ / Node 24+); Laya 0.3.23 optional|—|
 
 ## License
 

@@ -12,6 +12,7 @@ description: "Operate EssentialsX on Minecraft 1.21.x servers with safe, practic
 - `Do not use when`: the task is generic server deployment/proxy/performance architecture (`minecraft-server-admin`).
 - `Do not use when`: the task is writing Java plugin code (`minecraft-plugin-dev`).
 - `Do not use when`: the task is WorldEdit selection/build workflows (`minecraft-worldedit-ops`).
+- `Do not use when`: the task is LuckPerms group, track or context design (`minecraft-permissions-admin`).
 
 ## Support Assets
 

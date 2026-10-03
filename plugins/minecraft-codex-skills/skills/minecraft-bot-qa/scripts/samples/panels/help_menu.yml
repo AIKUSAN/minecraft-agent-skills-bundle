@@ -1,0 +1,24 @@
+title: How To Play
+subtitle: Short tips for new players.
+layout:
+  0: [movement, chat]
+  1: [back]
+items:
+  movement:
+    material: LEATHER_BOOTS
+    name: Moving Around
+    actions:
+      commands:
+        - "[msg] Use the spawn button in the menu if you get lost."
+  chat:
+    material: WRITABLE_BOOK
+    name: Chat Tips
+    actions:
+      commands:
+        - "[msg] Press T to chat. Keep it friendly."
+  back:
+    material: ARROW
+    name: Back
+    actions:
+      commands:
+        - "[open] main_menu"

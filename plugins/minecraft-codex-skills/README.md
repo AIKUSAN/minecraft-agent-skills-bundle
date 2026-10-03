@@ -28,7 +28,17 @@ plugins/minecraft-codex-skills/
 | Server and mod development | `minecraft-plugin-dev`, `minecraft-modding`, `minecraft-multiloader`, `minecraft-bedrock-addon-dev` |
 | Vanilla and content systems | `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation` |
 | Resource packs and conversion | `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen` |
-| Quality and release | `minecraft-testing`, `minecraft-ci-release` |
+| Quality and release | `minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release` |
+| Multi-skill requests | `minecraft-task-router` |
+
+## Subagents
+
+Claude Code loads five specialist subagents from this plugin's `agents/`
+folder: `minecraft-java-ops`, `minecraft-bedrock-ops`, `minecraft-code-dev`,
+`minecraft-content-author`, and `minecraft-qa-release`. `minecraft-task-router`
+runs in the main thread and hands each part of a multi-skill request to the
+right one. Subagents never start other subagents. Codex and other hosts without
+subagents follow the same plan one skill at a time.
 
 `minecraft-imagegen` is host-conditional. Codex supports image generation
 directly; other hosts should only route that skill when an equivalent image tool
@@ -51,12 +61,16 @@ is available.
 claude --plugin-dir ./plugins/minecraft-codex-skills
 ```
 
+Claude Code loads the skills and the five subagents from this plugin. Plugin skills
+appear with the plugin name as a prefix, such as
+`minecraft-codex-skills:minecraft-task-router`.
+
 ## Development model
 
-- Do not edit `plugins/minecraft-codex-skills/skills/` directly.
-- Edit canonical skills in `.agents/skills/`.
+- Do not edit `plugins/minecraft-codex-skills/skills/` or `plugins/minecraft-codex-skills/agents/` directly.
+- Edit canonical skills in `.agents/skills/` and subagents in `.agents/agents/`.
 - Run `bash ./scripts/sync-skills-layout.sh sync` from the repository root to
-  refresh `.codex/skills/`, `.claude/skills/`, and this plugin mirror.
+  refresh `.codex/skills/`, `.claude/skills/`, `.claude/agents/`, and this plugin mirror.
 - Run `npm run check:plugin-bundle` after manifest, marketplace, or plugin README
   edits.
 

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Added
+
+- Added `minecraft-task-router`, a skill that classifies multi-skill requests, applies tie-breaker rules between overlapping skills, orders work with safety gates, and delegates to subagents with a fixed brief and return format.
+- Added five specialist subagents in `.agents/agents/` (`minecraft-java-ops`, `minecraft-bedrock-ops`, `minecraft-code-dev`, `minecraft-content-author`, `minecraft-qa-release`), mirrored to `.claude/agents/` and the plugin's `agents/` folder.
+- Added `npm run check:routing`, which checks that every skill is in the router, owned by exactly one subagent, covered by role routing, and that the agent mirrors match. It also requires each subagent to declare a `tools` allowlist without the Agent tool.
+- Added `minecraft-bot-qa`, a skill for QA playthroughs of a live dev server with Java (Mineflayer) and Bedrock (bedrock-protocol through Geyser and Floodgate) bots.
+- Added structured bot logging, NPC dialogue and menu walkers, a Bedrock mock server, sample panel configs, and a worked example from a real quest server.
+- Added a judge layer where deterministic assertions decide the exit code and the Laya model (`convaiinnovations/laya`) gives an optional second opinion. Laya can be switched off with `--no-laya` or `NO_LAYA=1`.
+- Added an offline self-test and a static setup check, `check-bot-setup.mjs`, plus `npm run check:bot-kit`.
+
+### Changed
+
+- Updated the README: bot QA quick start, subagent-aware install notes, and example prompts for both Codex and Claude Code, including a multi-skill prompt and a bot QA prompt.
+- Fixed role routing in the skills index: multiloader, commands-scripting, world-generation and imagegen were missing from every role. Added a Content Author role and a route for work that spans roles.
+- Added the missing reverse "Do not use when" pointers between overlapping skills (server-admin and bedrock-server-admin, plugin-dev and bedrock-addon-dev, datapack and world-generation, testing and bot-qa, and others).
+- Replaced "skills are independent, no cross-skill dependencies" with a clear rule: skills never read each other's files, and handoffs go through the router and subagents.
+- `minecraft-server-admin` now says when to delegate to a subagent and when not to (inside a subagent it returns a handoff note instead).
+- Sync script now mirrors the agent definitions as well as the skills.
+
 ## [1.0.0] - 2026-05-22
 
 ### Added

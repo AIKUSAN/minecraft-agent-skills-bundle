@@ -13,6 +13,7 @@ table below is a router, not an exhaustive layout listing.
 
 | Skill | Primary use cases | Choose this instead when |
 |---|---|---|
+| `minecraft-task-router` | Requests that need more than one skill or an unclear platform: classify, break ties, order the work, delegate to specialist subagents, merge results | One skill clearly fits (load it directly) |
 | `minecraft-modding` | Build NeoForge or Fabric mods (blocks, items, entities, GUIs, datagen) | You need a single shared codebase for both loaders (`minecraft-multiloader`) |
 | `minecraft-multiloader` | Architectury projects that ship both NeoForge and Fabric from one repo | You only need one loader (`minecraft-modding`) |
 | `minecraft-plugin-dev` | Write Paper/Bukkit/Spigot plugins in Java 21 | You need server operations or deployment guidance (`minecraft-server-admin`) |
@@ -23,6 +24,7 @@ table below is a router, not an exhaustive layout listing.
 | `minecraft-resource-pack-conversion` | Convert Java resource packs into Bedrock `.mcpack` outputs and report unsupported assets | You need to create or edit a Java resource pack directly (`minecraft-resource-pack`) |
 | `minecraft-imagegen` | Generate pack icons, promo art, thumbnails, concept textures, and UI mockups | You need deterministic pack structure, model JSON, sounds, or shader files (`minecraft-resource-pack`) |
 | `minecraft-testing` | JUnit, MockBukkit, NeoForge/Fabric GameTests, CI test wiring | You need release pipelines and publishing (`minecraft-ci-release`) |
+| `minecraft-bot-qa` | Java and Bedrock bot playthroughs of a live dev server: join, NPC dialogue, menu clicks, structured logs, judge reports (deterministic first, optional Laya second opinion), offline self-test | You need unit tests or GameTests (`minecraft-testing`) or release pipelines (`minecraft-ci-release`) |
 | `minecraft-ci-release` | GitHub Actions, release automation, Modrinth/CurseForge publishing | You need local implementation details of mod/plugin features (pick a dev skill) |
 | `minecraft-server-admin` | Java server/plugin orchestration: Paper/Purpur/Folia/Velocity setup, plugin sourcing, archetypes, folder/zip analysis, tuning, backups, proxies, troubleshooting | You need command-heavy map editing (`minecraft-worldedit-ops`) or EssentialsX policy (`minecraft-essentials-ops`) |
 | `minecraft-bedrock-server-admin` | Bedrock Dedicated Server install/update, access files, packs, worlds, backups, and incidents | You need Java server operations (`minecraft-server-admin`) |
@@ -35,7 +37,9 @@ table below is a router, not an exhaustive layout listing.
 ## Role Routing
 
 - Minecraft Administrator: use `minecraft-server-admin`, `minecraft-bedrock-server-admin`, `minecraft-permissions-admin`, `minecraft-essentials-ops`, `minecraft-worldedit-ops`, and `minecraft-crossplay-ops` based on the platform and tool involved.
-- Minecraft Server Developer: use `minecraft-plugin-dev`, `minecraft-modding`, `minecraft-datapack`, `minecraft-bedrock-addon-dev`, `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-testing`, and `minecraft-ci-release` based on the deliverable.
+- Minecraft Server Developer: use `minecraft-plugin-dev`, `minecraft-modding`, `minecraft-multiloader`, `minecraft-bedrock-addon-dev`, `minecraft-testing`, `minecraft-bot-qa`, and `minecraft-ci-release` based on the deliverable.
+- Minecraft Content Author: use `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation`, `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, and `minecraft-imagegen` based on the content type.
+- Work that spans roles: start with `minecraft-task-router`. It sends each part to a specialist subagent (see Subagents below).
 
 ## Overlap Boundaries
 
@@ -47,23 +51,41 @@ table below is a router, not an exhaustive layout listing.
 - Use `minecraft-essentials-ops` for EssentialsX-specific commands, config, and permissions.
 - Use `minecraft-plugin-dev` when the task is writing Java plugin code rather than operating existing plugins.
 - Use `minecraft-imagegen` for raster art, thumbnails, pack icons, and concept textures; use `minecraft-resource-pack` when the task is final pack structure plus JSON/audio/shader implementation.
+- For overlaps not listed here, `minecraft-task-router` has the ordered tie-breaker rules (platform first, writing versus operating, worldgen versus datapack, tests versus pipelines, and so on).
 - `minecraft-imagegen` requires a host that exposes image generation; route it only when the current agent environment provides an equivalent image tool.
+
+## Subagents
+
+On hosts that support subagents (Claude Code does), `minecraft-task-router` runs in the main thread and hands work to five specialists defined in `.agents/agents/`. Each one loads only its own skills and never starts other subagents.
+
+| Subagent | Skills |
+|---|---|
+| `minecraft-java-ops` | `minecraft-server-admin`, `minecraft-permissions-admin`, `minecraft-essentials-ops`, `minecraft-worldedit-ops` |
+| `minecraft-bedrock-ops` | `minecraft-bedrock-server-admin`, `minecraft-crossplay-ops` |
+| `minecraft-code-dev` | `minecraft-plugin-dev`, `minecraft-modding`, `minecraft-multiloader`, `minecraft-bedrock-addon-dev` |
+| `minecraft-content-author` | `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation`, `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen` |
+| `minecraft-qa-release` | `minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release` |
+
+Hosts without subagents run the same plan one skill at a time.
 
 ## Sync Model
 
 Edit only this canonical tree:
 
 - `.agents/skills/`
+- `.agents/agents/` (subagent definitions)
 
 Then mirror to compatibility trees:
 
 - `.codex/skills/`
 - `.claude/skills/`
 - `plugins/minecraft-codex-skills/skills/`
+- `.claude/agents/` and `plugins/minecraft-codex-skills/agents/` (subagent definitions)
 
 Commands:
 
 ```bash
 bash ./scripts/sync-skills-layout.sh sync
 npm run audit:skills
+npm run check:routing
 ```
