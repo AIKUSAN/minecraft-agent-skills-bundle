@@ -142,4 +142,5 @@ This skill is built on open-source projects. It installs them as dependencies an
 - [Mineflayer](https://github.com/PrismarineJS/mineflayer) by PrismarineJS (MIT) drives the Java bots.
 - [bedrock-protocol](https://github.com/PrismarineJS/bedrock-protocol) by PrismarineJS (MIT) drives the Bedrock bots.
 - [Laya](https://github.com/NandhaKishorM/laya) by Nandha Kishor M and Convai Innovations (Apache-2.0; model on [Hugging Face](https://huggingface.co/convaiinnovations/laya)) gives the optional second opinion in the judges.
+- Forks kept for reference: [AIKUSAN/mineflayer](https://github.com/AIKUSAN/mineflayer), [AIKUSAN/bedrock-protocol](https://github.com/AIKUSAN/bedrock-protocol) and [AIKUSAN/laya](https://github.com/AIKUSAN/laya). The kit installs the upstream releases, not the forks.
 - [Geyser and Floodgate](https://geysermc.org) from the GeyserMC team let Bedrock players join Java servers.

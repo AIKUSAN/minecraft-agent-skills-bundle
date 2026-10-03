@@ -1,6 +1,6 @@
 {
   "name": "minecraft-codex-skills",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A multi-host Minecraft Java and Bedrock development skills bundle for Codex, Claude Code, and compatible agent hosts, with image-generation workflows when the host supports them.",
   "author": {
     "name": "AIKUSAN",
