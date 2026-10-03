@@ -15,7 +15,7 @@ description: "Create, edit, and debug Minecraft vanilla datapacks for 1.21.x. Co
 
 ---
 
-## Pack Metadata (1.21.x)
+## Pack Metadata (1.21.x and 26.x)
 
 | Minecraft Version | Preferred `pack` metadata |
 |-------------------|---------------------------|
@@ -27,12 +27,16 @@ description: "Create, edit, and debug Minecraft vanilla datapacks for 1.21.x. Co
 | 1.21.7 / 1.21.8   | `pack_format: 81` |
 | 1.21.9 / 1.21.10  | `min_format: 88.0`, `max_format: 88.0` |
 | 1.21.11           | `min_format: 94.1`, `max_format: 94.1` |
+| 26.1 – 26.1.2     | `min_format: 101.1`, `max_format: 101.1` |
+| 26.2              | `min_format: 107.1`, `max_format: 107.1` |
+| 26.3              | `min_format: 121.0`, `max_format: 121.0` |
 
 Use `pack_format` through 1.21.8. Starting in 1.21.9, Mojang replaced that
 single field with explicit `min_format` / `max_format` values.
 
-Keep `pack.mcmeta` exact for the patch you target instead of trying to span the
-entire 1.21.x line with one metadata block.
+Source: the Minecraft Wiki data pack format table. Recheck it when a new release ships.
+Keep `pack.mcmeta` exact for the release you target instead of trying to span
+several releases with one metadata block.
 
 ---
 
@@ -81,13 +85,13 @@ my-datapack/
 }
 ```
 
-### 1.21.9 and newer
+### 1.21.9 and newer (example: 26.2)
 
 ```json
 {
   "pack": {
-    "min_format": 94.1,
-    "max_format": 94.1,
+    "min_format": 107.1,
+    "max_format": 107.1,
     "description": "My Custom Datapack v1.0"
   }
 }

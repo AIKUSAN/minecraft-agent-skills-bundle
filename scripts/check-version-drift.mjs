@@ -8,9 +8,9 @@ const checks = [
   {
     file: "README.md",
     required: [
-      /Paper 1\.21\.11 server/,
-      /Vanilla datapack\|1\.21–1\.21\.11 \(formats 48–94\.1; `min_format` \/ `max_format` from 1\.21\.9\+\)\|—/,
-      /Resource pack\|1\.21–1\.21\.11 \(formats 34–75\.0; `min_format` \/ `max_format` from 1\.21\.9\+\)\|—/
+      /Paper 26\.2 server/,
+      /Vanilla datapack\|1\.21–26\.3 \(formats 48–121\.0; `min_format` \/ `max_format` from 1\.21\.9\+\)\|—/,
+      /Resource pack\|1\.21–1\.21\.11 \(formats 34–75\.0; 26\.x formats are not verified yet\)\|—/
     ]
   },
   {
@@ -46,8 +46,8 @@ const checks = [
     file: ".agents/skills/minecraft-datapack/SKILL.md",
     required: [
       /1\.21\.11\s+\| `min_format: 94\.1`, `max_format: 94\.1`/,
-      /"min_format": 94\.1/,
-      /"max_format": 94\.1/
+      /"min_format": 107\.1/,
+      /"max_format": 107\.1/
     ]
   },
   {

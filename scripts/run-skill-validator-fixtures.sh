@@ -263,7 +263,7 @@ expect_pass "server-admin analyzer paper survival folder" \
   --input "$server_admin_tmp/paper-survival" \
   --output "$server_admin_tmp/paper-survival.json" \
   --format json \
-  --target-version 1.21.11 \
+  --target-version 26.2 \
   --server-type auto
 python3 - "$server_admin_tmp/paper-survival.json" <<'PY'
 import json
@@ -300,7 +300,7 @@ expect_pass "server-admin analyzer paper survival zip" \
   --input "$server_admin_tmp/paper-survival.zip" \
   --output "$server_admin_tmp/paper-survival-zip.json" \
   --format json \
-  --target-version 1.21.11 \
+  --target-version 26.2 \
   --server-type auto
 python3 - "$server_admin_tmp/paper-survival.json" "$server_admin_tmp/paper-survival-zip.json" <<'PY'
 import json
@@ -330,7 +330,7 @@ expect_pass "server-admin analyzer velocity lobby" \
   --input "$server_admin_tmp/lobby-proxy" \
   --output "$server_admin_tmp/lobby-proxy.md" \
   --format md \
-  --target-version 1.21.11 \
+  --target-version 26.2 \
   --server-type auto
 expect_pass_contains "server-admin analyzer velocity markdown" "Detected server type: \`velocity\`" \
   grep -F "Detected server type: \`velocity\`" "$server_admin_tmp/lobby-proxy.md"
@@ -342,7 +342,7 @@ expect_pass "server-admin analyzer missing dependency fixture" \
   --input "$server_admin_tmp/minigame-missing-dep" \
   --output "$server_admin_tmp/minigame-missing-dep.json" \
   --format json \
-  --target-version 1.21.11 \
+  --target-version 26.2 \
   --server-type auto
 python3 - "$server_admin_tmp/minigame-missing-dep.json" <<'PY'
 import json
@@ -369,7 +369,7 @@ expect_pass "server-admin analyzer suspicious jar fixture" \
   --input "$server_admin_tmp/suspicious" \
   --output "$server_admin_tmp/suspicious.json" \
   --format json \
-  --target-version 1.21.11 \
+  --target-version 26.2 \
   --server-type paper
 python3 - "$server_admin_tmp/suspicious.json" <<'PY'
 import json
@@ -430,19 +430,23 @@ expect_temp_skill_pass "ci-release standalone installed mirror" \
 
 expect_path "tests/fixtures/validators/plugin-dev/valid"
 expect_path "tests/fixtures/validators/plugin-dev/valid-newer-api-version"
+expect_path "tests/fixtures/validators/plugin-dev/valid-26x"
 expect_path "tests/fixtures/validators/plugin-dev/invalid"
 expect_path "tests/fixtures/validators/plugin-dev/invalid-api-version"
 expect_path "tests/fixtures/validators/plugin-dev/invalid-api-version-zero-patch"
 expect_pass "plugin-dev valid" \
   ./.agents/skills/minecraft-plugin-dev/scripts/validate-plugin-layout.sh \
   --root tests/fixtures/validators/plugin-dev/valid
+expect_pass_contains "plugin-dev valid 26.x api-version" "documented 1.21.x / 26.x skill scope" \
+  ./.agents/skills/minecraft-plugin-dev/scripts/validate-plugin-layout.sh \
+  --root tests/fixtures/validators/plugin-dev/valid-26x
 expect_pass_contains "plugin-dev valid newer api-version warns" "newer than the repo's documented Paper example patch" \
   ./.agents/skills/minecraft-plugin-dev/scripts/validate-plugin-layout.sh \
   --root tests/fixtures/validators/plugin-dev/valid-newer-api-version
 expect_fail_contains "plugin-dev invalid" "api-version has invalid format" \
   ./.agents/skills/minecraft-plugin-dev/scripts/validate-plugin-layout.sh \
   --root tests/fixtures/validators/plugin-dev/invalid
-expect_fail_contains "plugin-dev invalid api-version range" "api-version is outside the documented 1.21.x skill scope" \
+expect_fail_contains "plugin-dev invalid api-version range" "api-version is outside the documented 1.21.x / 26.x skill scope" \
   ./.agents/skills/minecraft-plugin-dev/scripts/validate-plugin-layout.sh \
   --root tests/fixtures/validators/plugin-dev/invalid-api-version
 expect_fail_contains "plugin-dev invalid api-version zero patch" "patch must be a positive integer without leading zeroes" \

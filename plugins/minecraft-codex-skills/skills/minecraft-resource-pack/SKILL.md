@@ -32,6 +32,7 @@ or mod loader required. Works on vanilla clients and servers.
 | 1.21.7 / 1.21.8   | `pack_format: 64` |
 | 1.21.9 / 1.21.10  | `min_format: 69.0`, `max_format: 69.0` |
 | 1.21.11           | `min_format: 75.0`, `max_format: 75.0` |
+| 26.x              | Not verified here. Read the Minecraft Wiki resource pack format table for your exact release. |
 
 Use `pack_format` through 1.21.8. Starting in 1.21.9, `pack.mcmeta` switches to
 `min_format` / `max_format` instead of the older single-number field.

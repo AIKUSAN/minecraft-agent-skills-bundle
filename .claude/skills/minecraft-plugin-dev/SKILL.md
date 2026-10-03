@@ -1,6 +1,6 @@
 ---
 name: minecraft-plugin-dev
-description: "Develop Minecraft server plugins using the Paper/Bukkit/Spigot API for Minecraft 1.21.x. Handles creating Paper plugins with JavaPlugin, event listeners with @EventHandler, commands, schedulers (sync/async/Folia-safe), Persistent Data Container (PDC), Adventure text components, Vault economy integration, BungeeCord/Velocity messaging, plugin.yml and paper-plugin.yml configuration, YAML config management, and Paper-specific enhancement APIs. Always targets Paper API 1.21.x (Java 21) with Gradle (Kotlin DSL). Plugins run server-side only and do not require client installation. Use when creating or modifying Minecraft server plugins, working with Paper/Bukkit/Spigot APIs, or developing server-side features involving event handlers, commands, or plugin.yml configuration."
+description: "Develop Minecraft server plugins using the Paper/Bukkit/Spigot API for Minecraft 26.x (and the 1.21.x line). Handles creating Paper plugins with JavaPlugin, event listeners with @EventHandler, commands, schedulers (sync/async/Folia-safe), Persistent Data Container (PDC), Adventure text components, Vault economy integration, BungeeCord/Velocity messaging, plugin.yml and paper-plugin.yml configuration, YAML config management, and Paper-specific enhancement APIs. Targets Paper API 26.2 (Java 25; 1.21.x servers use Java 21) with Gradle (Kotlin DSL). Plugins run server-side only and do not require client installation. Use when creating or modifying Minecraft server plugins, working with Paper/Bukkit/Spigot APIs, or developing server-side features involving event handlers, commands, or plugin.yml configuration."
 ---
 
 # Minecraft Plugin Development Skill
@@ -56,13 +56,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:26.2.build.+")
     // Optional: Vault economy/permission integration
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
 
 tasks {
@@ -123,7 +123,7 @@ main: com.example.myplugin.MyPlugin
 description: An example Paper plugin
 author: YourName
 website: https://github.com/example/my-plugin
-api-version: '1.21.11'
+api-version: '26.2'
 
 commands:
   myplugin:
@@ -141,13 +141,14 @@ permissions:
     default: op
 ```
 
-> Paper 1.20.5+ supports major/minor/patch `api-version` values.
-> Use `api-version: '1.21.11'` when you target that Paper patch specifically, or `api-version: '1.21'`
-> only when you intentionally support the broader 1.21.x line.
-> In this repo, the validator accepts `1.21` plus positive `1.21.<patch>` values on the 1.21 line.
-> Patches newer than the repo's current example patch (`1.21.11`) are allowed but warned so future
-> Paper updates do not force an immediate validator edit.
-> Values such as `1.21.0`, `1.21.01`, or `1.22` are rejected.
+> Minecraft Java now uses year-based versions (26.1, 26.2, 26.3). Use `api-version: '26.2'`
+> to target Paper 26.2. Older servers on the 1.21 line still use `api-version: '1.21'`
+> or `'1.21.<patch>'`.
+> In this repo, the validator accepts `1.21`, positive `1.21.<patch>` values, and `26.<minor>` or
+> `26.<minor>.<hotfix>` values. A 26.x minor newer than the documented example (`26.2`) is allowed
+> but warned, so new Paper releases do not force an immediate validator edit.
+> Values such as `1.21.0`, `1.21.01`, `1.22` or `26.0` are rejected.
+> Paper 26.x needs Java 25. Paper 26.3 is still beta; confirm the build on https://papermc.io/downloads/paper before you pin it.
 
 ### `paper-plugin.yml` (Paper-only metadata)
 
@@ -159,7 +160,7 @@ to Bukkit-derived servers that do not understand the Paper-specific file.
 name: MyPlugin
 version: "${version}"
 main: com.example.myplugin.MyPlugin
-api-version: '1.21.11'
+api-version: '26.2'
 folia-supported: true
 
 dependencies:
@@ -487,7 +488,7 @@ profile lookup, and protection-plugin integration examples.
    ```
 
 The validator checks:
-- `plugin.yml` required keys (`name`, `version`, `main`, `api-version`) and repo-supported `1.21` / positive `1.21.<patch>` `api-version` values on the 1.21.x line, with warnings for patches newer than the repo's current example version
+- `plugin.yml` required keys (`name`, `version`, `main`, `api-version`) and repo-supported `1.21`, positive `1.21.<patch>` and `26.<minor>[.<hotfix>]` `api-version` values, with warnings for versions newer than the repo's current example
 - Main class path exists and extends `JavaPlugin`
 - `/reload` anti-pattern detection in source snippets
 
@@ -495,7 +496,7 @@ The validator checks:
 
 ## References
 
-- Paper API Javadoc: https://jd.papermc.io/paper/1.21/
+- Paper API Javadoc: https://jd.papermc.io/paper/
 - Paper Dev Docs: https://docs.papermc.io/paper/dev/getting-started/
 - Adventure (text API): https://docs.advntr.dev/
 - MiniMessage format: https://docs.advntr.dev/minimessage/format.html

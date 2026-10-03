@@ -165,7 +165,7 @@ Each prompt starts in a different host. Pick the one you use.
 Codex:
 
 ```bash
-codex "Generate a docker-compose.yml for a Paper 1.21.11 server with Aikar JVM flags, persistent volumes, backups, and auto-restart."
+codex "Generate a docker-compose.yml for a Paper 26.2 server with Aikar JVM flags, persistent volumes, backups, and auto-restart."
 
 codex "Analyze this Paper server folder, identify installed plugins, flag missing dependencies, and recommend a survival SMP plugin stack."
 
@@ -183,7 +183,7 @@ codex "Join my dev server with a Java bot and a Bedrock bot, click every menu bu
 Claude Code (with the plugin; drop `--plugin-dir` if you copied `.claude/` into your project):
 
 ```bash
-claude --plugin-dir ./plugins/minecraft-codex-skills "Generate a docker-compose.yml for a Paper 1.21.11 server with Aikar JVM flags, persistent volumes, backups, and auto-restart."
+claude --plugin-dir ./plugins/minecraft-codex-skills "Generate a docker-compose.yml for a Paper 26.2 server with Aikar JVM flags, persistent volumes, backups, and auto-restart."
 
 claude --plugin-dir ./plugins/minecraft-codex-skills "Analyze this Paper server folder, identify installed plugins, flag missing dependencies, and recommend a survival SMP plugin stack."
 
@@ -247,13 +247,13 @@ npm run lint:md
 
 |Platform|Version|Java|
 |---|---|---|
-|NeoForge|1.21.x examples centered on 21.11.x|21|
-|Fabric|1.21.11 line (`fabric-api:0.116.10+1.21.1`)|21|
-|Paper/Bukkit|1.21.x (`paper-api:1.21.11-R0.1-SNAPSHOT`)|21|
+|NeoForge|1.21.x examples centered on 21.11.x (26.x not updated yet; check NeoForge releases)|21|
+|Fabric|1.21.11 line (`fabric-api:0.116.10+1.21.1`; 26.x not updated yet; check fabricmc.net/develop)|21|
+|Paper/Bukkit|26.2 stable (`paper-api:26.2.build.+`); 1.21.x still validated|25 (21 for 1.21.x)|
 |Bedrock Dedicated Server|1.21.x|—|
 |Bedrock add-ons / Script API|1.21.x|—|
-|Vanilla datapack|1.21–1.21.11 (formats 48–94.1; `min_format` / `max_format` from 1.21.9+)|—|
-|Resource pack|1.21–1.21.11 (formats 34–75.0; `min_format` / `max_format` from 1.21.9+)|—|
+|Vanilla datapack|1.21–26.3 (formats 48–121.0; `min_format` / `max_format` from 1.21.9+)|—|
+|Resource pack|1.21–1.21.11 (formats 34–75.0; 26.x formats are not verified yet)|—|
 |Bot QA kit (Java bots / Bedrock bots)|Mineflayer / bedrock-protocol 3.60 (Node 20+ / Node 24+); Laya 0.3.23 optional|—|
 
 ## Built On
