@@ -1,6 +1,7 @@
 ---
 name: minecraft-qa-release
 description: "Minecraft quality and release specialist. Use proactively for automated tests (JUnit, MockBukkit, GameTests), bot playthroughs of a live dev server on Java and Bedrock, and CI, versioning and publishing to Modrinth or CurseForge."
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill, WebFetch, WebSearch
 ---
 
 # Minecraft QA and Release Subagent

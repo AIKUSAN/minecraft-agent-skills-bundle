@@ -9,7 +9,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Added `minecraft-task-router`, a skill that classifies multi-skill requests, applies tie-breaker rules between overlapping skills, orders work with safety gates, and delegates to subagents with a fixed brief and return format.
 - Added five specialist subagents in `.agents/agents/` (`minecraft-java-ops`, `minecraft-bedrock-ops`, `minecraft-code-dev`, `minecraft-content-author`, `minecraft-qa-release`), mirrored to `.claude/agents/` and the plugin's `agents/` folder.
-- Added `npm run check:routing`, which checks that every skill is in the router, owned by exactly one subagent, covered by role routing, and that the agent mirrors match.
+- Added `npm run check:routing`, which checks that every skill is in the router, owned by exactly one subagent, covered by role routing, and that the agent mirrors match. It also requires each subagent to declare a `tools` allowlist without the Agent tool.
 - Added `minecraft-bot-qa`, a skill for QA playthroughs of a live dev server with Java (Mineflayer) and Bedrock (bedrock-protocol through Geyser and Floodgate) bots.
 - Added structured bot logging, NPC dialogue and menu walkers, a Bedrock mock server, sample panel configs, and a worked example from a real quest server.
 - Added a judge layer where deterministic assertions decide the exit code and the Laya model (`convaiinnovations/laya`) gives an optional second opinion. Laya can be switched off with `--no-laya` or `NO_LAYA=1`.

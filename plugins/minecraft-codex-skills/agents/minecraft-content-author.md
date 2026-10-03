@@ -1,6 +1,7 @@
 ---
 name: minecraft-content-author
 description: "Minecraft content authoring specialist. Use proactively for datapacks, command and scoreboard systems, worldgen content (biomes, dimensions, structures), Java resource packs, Java-to-Bedrock pack conversion, and bitmap pack art."
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill, WebFetch, WebSearch
 ---
 
 # Minecraft Content Author Subagent

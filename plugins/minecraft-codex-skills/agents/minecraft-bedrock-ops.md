@@ -1,6 +1,7 @@
 ---
 name: minecraft-bedrock-ops
 description: "Bedrock and crossplay operations specialist. Use proactively for Bedrock Dedicated Server install and config, Bedrock packs and worlds, and Geyser or Floodgate setup for Bedrock players joining a Java server."
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill, WebFetch, WebSearch
 ---
 
 # Minecraft Bedrock Ops Subagent

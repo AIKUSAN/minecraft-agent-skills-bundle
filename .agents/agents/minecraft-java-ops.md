@@ -1,6 +1,7 @@
 ---
 name: minecraft-java-ops
 description: "Java Minecraft server operations specialist. Use proactively for Paper, Purpur, Folia or Velocity server setup, plugin sourcing and rollout, server folder or zip analysis, backups, tuning, incidents, LuckPerms permissions, EssentialsX, and WorldEdit workflows."
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill, WebFetch, WebSearch
 ---
 
 # Minecraft Java Ops Subagent

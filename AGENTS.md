@@ -305,6 +305,7 @@ role descriptions.
 Rules:
 
 - The router and any coordinator (`minecraft-server-admin` in the main agent) run in the main thread. Subagents are leaves and never start other subagents.
+- Each subagent has a least-privilege `tools` allowlist that leaves out the Agent tool, so the leaf rule is enforced and not just stated.
 - Every skill belongs to exactly one subagent. `npm run check:routing` enforces this, along with router coverage and role routing.
 - Hosts without subagents follow the same plan one skill at a time.
 

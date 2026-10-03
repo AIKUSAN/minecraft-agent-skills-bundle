@@ -1,6 +1,7 @@
 ---
 name: minecraft-code-dev
 description: "Minecraft code development specialist. Use proactively for writing or fixing Paper plugins, NeoForge or Fabric mods, Architectury multiloader projects, and Bedrock add-ons with the Script API."
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill, WebFetch, WebSearch
 ---
 
 # Minecraft Code Dev Subagent

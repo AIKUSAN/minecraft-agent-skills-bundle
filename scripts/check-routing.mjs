@@ -52,6 +52,9 @@ for (const f of agentFiles) {
   for (const field of FORBIDDEN_AGENT_FIELDS) {
     if (new RegExp(`^${field}:`, "m").test(fm[1])) fail(file, `field \`${field}\` is ignored in plugin agents`);
   }
+  const tools = fm[1].match(/^tools:\s*(.+)$/m)?.[1]?.split(",").map((t) => t.trim()).filter(Boolean);
+  if (!tools) fail(file, "frontmatter missing `tools` allowlist (least privilege)");
+  else if (tools.some((t) => /^(Agent|Task)$/.test(t))) fail(file, "tools must not include Agent: subagents are leaves");
   if (name && !routerText.includes(`\`${name}\``)) fail(`.agents/skills/${ROUTER}/SKILL.md`, `does not list subagent \`${name}\``);
 
   const listed = [...text.matchAll(/^- `(minecraft-[a-z-]+)`$/gm)].map((m) => m[1]);
