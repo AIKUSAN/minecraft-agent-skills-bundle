@@ -61,12 +61,16 @@ is available.
 claude --plugin-dir ./plugins/minecraft-codex-skills
 ```
 
+Claude Code loads the skills and the five subagents from this plugin. Plugin skills
+appear with the plugin name as a prefix, such as
+`minecraft-codex-skills:minecraft-task-router`.
+
 ## Development model
 
-- Do not edit `plugins/minecraft-codex-skills/skills/` directly.
-- Edit canonical skills in `.agents/skills/`.
+- Do not edit `plugins/minecraft-codex-skills/skills/` or `plugins/minecraft-codex-skills/agents/` directly.
+- Edit canonical skills in `.agents/skills/` and subagents in `.agents/agents/`.
 - Run `bash ./scripts/sync-skills-layout.sh sync` from the repository root to
-  refresh `.codex/skills/`, `.claude/skills/`, and this plugin mirror.
+  refresh `.codex/skills/`, `.claude/skills/`, `.claude/agents/`, and this plugin mirror.
 - Run `npm run check:plugin-bundle` after manifest, marketplace, or plugin README
   edits.
 
