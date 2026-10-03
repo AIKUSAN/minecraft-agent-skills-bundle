@@ -29,6 +29,16 @@ plugins/minecraft-codex-skills/
 | Vanilla and content systems | `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation` |
 | Resource packs and conversion | `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen` |
 | Quality and release | `minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release` |
+| Multi-skill requests | `minecraft-task-router` |
+
+## Subagents
+
+Claude Code loads five specialist subagents from this plugin's `agents/`
+folder: `minecraft-java-ops`, `minecraft-bedrock-ops`, `minecraft-code-dev`,
+`minecraft-content-author`, and `minecraft-qa-release`. `minecraft-task-router`
+runs in the main thread and hands each part of a multi-skill request to the
+right one. Subagents never start other subagents. Codex and other hosts without
+subagents follow the same plan one skill at a time.
 
 `minecraft-imagegen` is host-conditional. Codex supports image generation
 directly; other hosts should only route that skill when an equivalent image tool

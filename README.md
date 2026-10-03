@@ -78,10 +78,13 @@ claude --plugin-dir ./plugins/minecraft-codex-skills
 
 ## Skill Routing
 
-The bundle is designed so the host agent can inspect a user prompt, select the
-smallest useful skill set, and split larger tasks across focused skill surfaces.
-True sub-agent spawning depends on the host runtime, but the skill descriptions
-and routing docs are written to support delegation when the runtime provides it.
+A request that fits one skill loads that skill directly. A request that spans
+several skills, or does not say whether it targets Java or Bedrock, starts with
+`minecraft-task-router`. The router classifies the request, applies tie-breaker
+rules between overlapping skills, orders the work (analysis, backup, staging,
+verification, rollout) and hands each part to a specialist subagent. Claude Code
+picks up the five subagents from the plugin automatically. Hosts without
+subagents follow the same plan one skill at a time.
 
 ![Generated polished How It Works workflow diagram](docs/assets/how-it-works.png)
 
@@ -93,6 +96,7 @@ and routing docs are written to support delegation when the runtime provides it.
 | Vanilla and content systems | `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation` |
 | Resource packs and conversion | `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen` |
 | Quality and release | `minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release` |
+| Multi-skill requests | `minecraft-task-router` |
 
 ## Skills Catalog
 
@@ -115,6 +119,7 @@ and routing docs are written to support delegation when the runtime provides it.
 | `minecraft-resource-pack-conversion` | Java-to-Bedrock resource-pack conversion with `.mcpack` output and unsupported asset reports |
 | `minecraft-imagegen` | Pack icons, server banners, promo images, concept textures, thumbnails, and visual briefs |
 | `minecraft-testing` | JUnit 5, MockBukkit, GameTests, fixtures, CI checks, and regression test planning |
+| `minecraft-task-router` | Routes requests that span several skills: classifies, breaks ties, orders the work with safety gates, delegates to specialist subagents, and merges the results |
 | `minecraft-bot-qa` | Bot playthroughs of a live dev server on Java (Mineflayer) and Bedrock (bedrock-protocol via Geyser), NPC and menu walkthroughs, structured logs, and judge reports with an optional Laya second opinion |
 | `minecraft-ci-release` | GitHub Actions, Modrinth and CurseForge publishing, release notes, versioning, and artifact checks |
 

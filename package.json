@@ -11,10 +11,11 @@
     "check:plugin-bundle": "node ./scripts/validate-plugin-bundle.mjs",
     "check:version-drift": "node ./scripts/check-version-drift.mjs",
     "check:workflow-pins": "node ./scripts/check-workflow-action-pins.mjs",
+    "check:routing": "node ./scripts/check-routing.mjs",
     "check:bot-kit": "node ./.agents/skills/minecraft-bot-qa/scripts/check-bot-setup.mjs --static",
     "check:community": "node ./scripts/check-github-community-files.mjs",
     "lint:md": "markdownlint-cli2 \"*.md\" \".github/**/*.md\" \"docs/**/*.md\" \".agents/**/*.md\" \".codex/**/*.md\" \".claude/**/*.md\" \"plugins/**/*.md\" \"tests/**/*.md\"",
-    "check": "npm run check:plugin-bundle && npm run audit:skills && npm run check:version-drift && npm run test:docs && npm run test:validators && npm run test:repo-policy && npm run check:workflow-pins && npm run check:community && npm run check:bot-kit && npm run lint:md"
+    "check": "npm run check:plugin-bundle && npm run audit:skills && npm run check:version-drift && npm run test:docs && npm run test:validators && npm run test:repo-policy && npm run check:workflow-pins && npm run check:community && npm run check:routing && npm run check:bot-kit && npm run lint:md"
   },
   "engines": {
     "node": ">=20"

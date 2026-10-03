@@ -13,6 +13,7 @@ optionally with Floodgate authentication.
 ### Routing Boundaries
 - `Use when`: the task is crossplay setup, Bedrock client access to a Java server, Geyser/Floodgate operations, crossplay resource-pack delivery, or compatibility triage.
 - `Do not use when`: the task is pure Java server administration (`minecraft-server-admin`), pure BDS administration (`minecraft-bedrock-server-admin`), pack conversion itself (`minecraft-resource-pack-conversion`), or Java plugin implementation (`minecraft-plugin-dev`).
+- `Do not use when`: the task is a bot playthrough from a Bedrock or Java client (`minecraft-bot-qa`).
 
 ## Architecture Choices
 

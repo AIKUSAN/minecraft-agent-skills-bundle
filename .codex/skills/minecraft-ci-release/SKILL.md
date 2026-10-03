@@ -17,6 +17,7 @@ Tag push (v*) → build + publish to Modrinth + CurseForge + GitHub Releases
 - `Use when`: the task is CI/CD pipelines, release automation, artifact publishing, versioning, or release governance.
 - `Do not use when`: the task is implementing gameplay/plugin/mod features (`minecraft-modding`, `minecraft-plugin-dev`, `minecraft-datapack`).
 - `Do not use when`: the task is server runtime operations and infrastructure tuning (`minecraft-server-admin`).
+- `Do not use when`: the task is writing the tests themselves (`minecraft-testing`).
 
 ---
 

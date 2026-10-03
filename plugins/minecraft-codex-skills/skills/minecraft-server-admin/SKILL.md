@@ -12,6 +12,8 @@ description: "Set up, configure, build, analyze, and operate Minecraft Java Edit
 - `Do not use when`: the task is writing plugin code (`minecraft-plugin-dev`) or writing mods/loaders (`minecraft-modding`, `minecraft-multiloader`).
 - `Do not use when`: the task is WorldEdit command workflows (`minecraft-worldedit-ops`) or EssentialsX workflow/policy design (`minecraft-essentials-ops`).
 - `Do not use when`: the task is datapack/resource-pack authoring (`minecraft-datapack`, `minecraft-resource-pack`).
+- `Do not use when`: the task is Bedrock Dedicated Server operations (`minecraft-bedrock-server-admin`) or Geyser/Floodgate crossplay setup (`minecraft-crossplay-ops`).
+- `Do not use when`: the task is a bot playthrough of a live server (`minecraft-bot-qa`).
 
 ## Support Assets
 
@@ -40,6 +42,12 @@ Delegate specialized work when the prompt narrows to a tool or implementation su
 - `minecraft-plugin-dev`: writing or modifying custom Java plugin code, Paper API usage, scheduler logic, commands, listeners, or plugin tests.
 
 For large prompts, decompose the work explicitly. Example: analyze the server folder here, route LuckPerms policy to `minecraft-permissions-admin`, route EssentialsX kit/economy setup to `minecraft-essentials-ops`, then return here for staged rollout, backups, and startup-log verification.
+
+How to delegate depends on where this skill is running:
+
+- In the main agent on a host with subagents, send each delegated part to the `minecraft-java-ops` subagent as a separate brief (use `minecraft-task-router` for the brief format and for work that also needs Bedrock, code or QA skills).
+- Inside a subagent, do not delegate. Finish what this skill covers and return `needs-other-skill` with a handoff note for the rest.
+- On a host without subagents, load the specialist skill yourself, one at a time, and keep this skill's order: analysis, backup, staging, verification, rollout.
 
 ---
 

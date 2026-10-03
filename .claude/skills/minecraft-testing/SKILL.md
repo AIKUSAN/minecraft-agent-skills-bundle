@@ -19,6 +19,7 @@ description: "Write automated tests for Minecraft mods and plugins for 1.21.x. C
 - `Use when`: the task is designing or implementing automated tests (unit, mock, gametest, CI test jobs) for Minecraft projects.
 - `Do not use when`: the task is implementing gameplay features rather than testing them (`minecraft-modding`, `minecraft-plugin-dev`, `minecraft-datapack`).
 - `Do not use when`: the task is release automation or publishing pipelines (`minecraft-ci-release`).
+- `Do not use when`: the task is a bot playthrough of a live dev server rather than code-level tests (`minecraft-bot-qa`).
 
 ## Bundled References And Helpers
 
