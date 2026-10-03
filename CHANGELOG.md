@@ -17,6 +17,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Updated the README: bot QA quick start, subagent-aware install notes, and example prompts for both Codex and Claude Code, including a multi-skill prompt and a bot QA prompt.
 - Fixed role routing in the skills index: multiloader, commands-scripting, world-generation and imagegen were missing from every role. Added a Content Author role and a route for work that spans roles.
 - Added the missing reverse "Do not use when" pointers between overlapping skills (server-admin and bedrock-server-admin, plugin-dev and bedrock-addon-dev, datapack and world-generation, testing and bot-qa, and others).
 - Replaced "skills are independent, no cross-skill dependencies" with a clear rule: skills never read each other's files, and handoffs go through the router and subagents.

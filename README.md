@@ -103,6 +103,10 @@ If the install fails while building the native RakNet module (no C++ compiler),
 run `npm install --ignore-scripts --prefix ./.agents/skills/minecraft-bot-qa/scripts`
 instead. The Bedrock bots then use the pure-JavaScript backend.
 
+If the install fails while building the native RakNet module (no C++ compiler), run
+`npm install --ignore-scripts --prefix ./.agents/skills/minecraft-bot-qa/scripts` instead. The
+Bedrock bots then use a pure JavaScript backend.
+
 The self-test runs offline against a mock Bedrock server. Point the bots at a dev
 or staging server only, and use throwaway accounts. Sign-in caches stay out of Git.
 See `.agents/skills/minecraft-bot-qa/SKILL.md` for the full workflows.
