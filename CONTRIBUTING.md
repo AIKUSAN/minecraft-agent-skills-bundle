@@ -5,7 +5,7 @@ Thanks for contributing to `minecraft-agent-skills-bundle`.
 ## Scope
 
 - Treat `.agents/skills/` as the canonical source of truth.
-- Do not edit `.codex/skills/`, `.claude/skills/`, or `plugins/minecraft-codex-skills/skills/` by hand. Sync them from canonical changes.
+- Do not edit `.codex/skills/`, `.claude/skills/`, `.claude/agents/`, `plugins/minecraft-codex-skills/skills/`, or `plugins/minecraft-codex-skills/agents/` by hand. Sync them from canonical changes.
 - Keep examples accurate for Minecraft `1.21.x` and Java `21`.
 - Prefer small, reviewable pull requests that change one skill, validator, or repo policy area at a time.
 

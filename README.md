@@ -203,6 +203,8 @@ The last two prompts span several skills, so they start with `minecraft-task-rou
 ## Repository Layout
 
 ```text
+AGENTS.md                               shared repo guidance (Codex)
+CLAUDE.md                               Claude Code guidance (imports AGENTS.md)
 .agents/skills/                         canonical skill source
 .agents/agents/                         canonical subagent definitions
 .codex/skills/                          Codex compatibility mirror
