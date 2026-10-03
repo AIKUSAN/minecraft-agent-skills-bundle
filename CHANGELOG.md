@@ -3,12 +3,13 @@
 All notable changes to this project will be documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [1.1.0] - 2026-10-03
 
 ### Added
 
 - Added `minecraft-task-router`, a skill that classifies multi-skill requests, applies tie-breaker rules between overlapping skills, orders work with safety gates, and delegates to subagents with a fixed brief and return format.
 - Added five specialist subagents in `.agents/agents/` (`minecraft-java-ops`, `minecraft-bedrock-ops`, `minecraft-code-dev`, `minecraft-content-author`, `minecraft-qa-release`), mirrored to `.claude/agents/` and the plugin's `agents/` folder.
+- Credited the projects the bot kit builds on and linked the AIKUSAN forks of Laya, Mineflayer and bedrock-protocol in the README and the `minecraft-bot-qa` skill. The kit still installs the upstream npm and pip releases.
 - Added `npm run check:routing`, which checks that every skill is in the router, owned by exactly one subagent, covered by role routing, and that the agent mirrors match. It also requires each subagent to declare a `tools` allowlist without the Agent tool.
 - Added `minecraft-bot-qa`, a skill for QA playthroughs of a live dev server with Java (Mineflayer) and Bedrock (bedrock-protocol through Geyser and Floodgate) bots.
 - Added structured bot logging, NPC dialogue and menu walkers, a Bedrock mock server, sample panel configs, and a worked example from a real quest server.

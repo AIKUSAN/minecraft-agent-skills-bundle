@@ -256,6 +256,18 @@ npm run lint:md
 |Resource pack|1.21–1.21.11 (formats 34–75.0; `min_format` / `max_format` from 1.21.9+)|—|
 |Bot QA kit (Java bots / Bedrock bots)|Mineflayer / bedrock-protocol 3.60 (Node 20+ / Node 24+); Laya 0.3.23 optional|—|
 
+## Built On
+
+The Java and Bedrock bot kit in `minecraft-bot-qa` builds on these open-source projects. The kit installs the upstream npm and pip releases. The AIKUSAN forks are kept for reference and credit.
+
+| Project | Used for | Upstream | AIKUSAN fork |
+|---|---|---|---|
+| Mineflayer (MIT) | Java bots | [PrismarineJS/mineflayer](https://github.com/PrismarineJS/mineflayer) | [AIKUSAN/mineflayer](https://github.com/AIKUSAN/mineflayer) |
+| bedrock-protocol (MIT) | Bedrock bots | [PrismarineJS/bedrock-protocol](https://github.com/PrismarineJS/bedrock-protocol) | [AIKUSAN/bedrock-protocol](https://github.com/AIKUSAN/bedrock-protocol) |
+| Laya (Apache-2.0) | Optional second opinion in the judges | [NandhaKishorM/laya](https://github.com/NandhaKishorM/laya) | [AIKUSAN/laya](https://github.com/AIKUSAN/laya) |
+
+Geyser and Floodgate from the [GeyserMC](https://geysermc.org) team let Bedrock players join Java servers.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
