@@ -34,7 +34,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--input", required=True, help="Server directory or zip archive to inspect")
     parser.add_argument("--output", required=True, help="Report path to write")
     parser.add_argument("--format", choices=("json", "md"), default="json", help="Report format")
-    parser.add_argument("--target-version", default="1.21.11", help="Target Minecraft version")
+    parser.add_argument("--target-version", default="26.2", help="Target Minecraft version")
     parser.add_argument(
         "--server-type",
         choices=("paper", "purpur", "folia", "velocity", "auto"),

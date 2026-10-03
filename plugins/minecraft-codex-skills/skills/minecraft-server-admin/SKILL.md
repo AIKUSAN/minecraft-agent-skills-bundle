@@ -1,6 +1,6 @@
 ---
 name: minecraft-server-admin
-description: "Set up, configure, build, analyze, and operate Minecraft Java Edition servers for 1.21.x across Paper, Purpur, Folia, Velocity networks, and modded (Fabric/NeoForge) deployments. Use this for Paper/Purpur/Folia/Velocity server building, plugin discovery/download/install planning from Hangar, Modrinth, GitHub, SpigotMC, or BukkitDev, plugin marketplace/source review, server zip/folder analysis, server archetype design (lobby, SMP, creative, minigames, proxy network), plugin compatibility/configuration planning, performance tuning, backups, incidents, Docker/Pterodactyl patterns, and security hardening. Use for Java server infrastructure and plugin operations, not for writing plugin or mod code."
+description: "Set up, configure, build, analyze, and operate Minecraft Java Edition servers for 26.x (and 1.21.x) across Paper, Purpur, Folia, Velocity networks, and modded (Fabric/NeoForge) deployments. Use this for Paper/Purpur/Folia/Velocity server building, plugin discovery/download/install planning from Hangar, Modrinth, GitHub, SpigotMC, or BukkitDev, plugin marketplace/source review, server zip/folder analysis, server archetype design (lobby, SMP, creative, minigames, proxy network), plugin compatibility/configuration planning, performance tuning, backups, incidents, Docker/Pterodactyl patterns, and security hardening. Use for Java server infrastructure and plugin operations, not for writing plugin or mod code."
 ---
 
 # Minecraft Server Administration Skill
@@ -60,7 +60,7 @@ python3 ./scripts/analyze-java-server.py \
   --input /path/to/server-or-archive.zip \
   --output server-report.json \
   --format json \
-  --target-version 1.21.11 \
+  --target-version 26.2 \
   --server-type auto
 ```
 
@@ -71,7 +71,7 @@ python3 ./scripts/analyze-java-server.py \
   --input /path/to/server \
   --output server-report.md \
   --format md \
-  --target-version 1.21.11
+  --target-version 26.2
 ```
 
 Review the report for:
@@ -167,7 +167,7 @@ Do not tune everything at once. Apply one group at a time.
 
 ### Step 4: Use stable startup flags
 
-For Java 21 on Paper/Purpur:
+For Java 25 on Paper/Purpur 26.x (use Java 21 for servers still on 1.21.x):
 
 ```bash
 java -Xms10G -Xmx10G \
@@ -436,12 +436,12 @@ Adjust these only after profiling identifies an actionable bottleneck.
 ```yaml
 services:
   paper:
-    image: itzg/minecraft-server:java21
+    image: itzg/minecraft-server:java25
     container_name: mc-paper
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
-      VERSION: "1.21.11"
+      VERSION: "26.2"
       MEMORY: "10G"
     ports:
       - "25565:25565"

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Changed
+
+- Moved the Paper, server-admin and datapack guidance to Minecraft Java 26.2 (stable). Paper examples use `paper-api:26.2.build.+`, `api-version: '26.2'` and Java 25.
+- The plugin layout validator now accepts `26.<minor>[.<hotfix>]` `api-version` values next to the 1.21 forms, and warns on a 26.x minor newer than 26.2.
+- Added data pack formats for 26.1 (101.1), 26.2 (107.1) and 26.3 (121.0).
+- The server analyzer's default `--target-version` is now 26.2.
+
+### Not updated yet
+
+- Fabric, NeoForge and Architectury examples stay on 1.21.11 until their 26.x release versions are confirmed. Resource pack formats for 26.x are also not confirmed. The README says so.
+
 ## [1.1.0] - 2026-10-03
 
 ### Added
