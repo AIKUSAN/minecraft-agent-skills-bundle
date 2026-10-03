@@ -1,10 +1,10 @@
 // ImageFrame wall builder bot (deterministic; Laya judges the log). Usage:
-//   node if_build.js --host 127.0.0.1 --port 25571 --user LOPQAif1 --auth offline --tag rehearsal --mode rehearse
+//   node if_build.js --host 127.0.0.1 --port 25571 --user QABotif1 --auth offline --tag rehearsal --mode rehearse
 // mode=rehearse builds a throwaway wall (creative, op) and runs selection + create. mode=run reads walls.json.
 const QAP = require('../../paths');
 const mineflayer = require('mineflayer'); const fs = require('fs'); const path = require('path');
 const a = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d; };
-const host = a('host', '127.0.0.1'), port = +a('port', 25571), user = a('user', 'LOPQAif1'), auth = a('auth', 'offline'), tag = a('tag', 'if'), mode = a('mode', 'rehearse');
+const host = a('host', '127.0.0.1'), port = +a('port', 25571), user = a('user', 'QABotif1'), auth = a('auth', 'offline'), tag = a('tag', 'if'), mode = a('mode', 'rehearse');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const file = path.join(QAP.dir('logs'), `${new Date().toISOString().replace(/[:.]/g, '-')}-${user}-${tag}.jsonl`);
 const out = fs.createWriteStream(file, { flags: 'a' }); const t0 = Date.now();

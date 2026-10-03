@@ -1,6 +1,6 @@
 // Returning player: rejoin, observe welcome-back title + menu, open /tabernacle, click each safe entry, log windows.
 const { connect, sleep, inv } = require('../../java/lib');
-const name = process.argv[2] || 'LOPQAe1', tag = process.argv[3] || 'menu';
+const name = process.argv[2] || 'QABote1', tag = process.argv[3] || 'menu';
 (async () => {
   const bot = connect({ name, tag });
   const wins = [];

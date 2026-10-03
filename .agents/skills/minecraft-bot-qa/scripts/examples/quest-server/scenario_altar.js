@@ -1,7 +1,7 @@
 // Offer marked items at the altar by normal play: walk near, hold item, right-click a block within the rule radius.
 const { connect, sleep, inv, setupNav, walkTo } = require('../../java/lib');
 const { Vec3 } = require('vec3');
-const name = process.argv[2] || 'LOPQAs1';
+const name = process.argv[2] || 'QABots1';
 const tag = process.argv[3] || 'altar';
 const items = (process.argv[4] || 'wheat,beef,mutton').split(',');
 const C = process.argv[5] ? { x: +process.argv[5], y: +process.argv[6], z: +process.argv[7] } : { x: -4231, y: 77, z: 3126 };

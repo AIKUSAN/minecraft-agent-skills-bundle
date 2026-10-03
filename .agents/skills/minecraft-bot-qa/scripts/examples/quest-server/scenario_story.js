@@ -2,7 +2,7 @@
 const { connect, sleep, inv, setupNav } = require('../../java/lib');
 const { converse } = require('../../java/dialogue');
 const { affirm } = require('../../java/strategies');
-const name = process.argv[2] || 'LOPQAs1';
+const name = process.argv[2] || 'QABots1';
 const tag = process.argv[3] || 'story';
 const order = (process.argv[4] || 'Moses,Wheat Farmer,Livestock Farmer,Well Digger,Moses,Aholiab,Aaron,Angel').split(',');
 const rounds = parseInt(process.argv[5] || '2', 10);

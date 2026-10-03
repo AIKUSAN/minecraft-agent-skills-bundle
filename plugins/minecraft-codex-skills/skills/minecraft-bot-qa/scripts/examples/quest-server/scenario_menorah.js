@@ -1,7 +1,7 @@
 // Light the menorah by normal play: enter fly1 (Aaron-unlocked flight), rise to the menorah, right-click a block with the lamp oil.
 const { connect, sleep, inv, setupNav, walkTo } = require('../../java/lib');
 const { Vec3 } = require('vec3');
-const name = process.argv[2] || 'LOPQAs1', tag = process.argv[3] || 'menorah';
+const name = process.argv[2] || 'QABots1', tag = process.argv[3] || 'menorah';
 const C = new Vec3(-4239, 81, 3041), RAD = 5;
 (async () => {
   const bot = connect({ name, tag }); setupNav(bot);

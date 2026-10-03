@@ -4,7 +4,7 @@ const { connect, sleep, inv, setupNav, walkTo } = require('../../java/lib');
 const { converse } = require('../../java/dialogue');
 const { affirm } = require('../../java/strategies');
 const { Vec3 } = require('vec3');
-const name = process.argv[2] || 'LOPQAfin2', tag = process.argv[3] || 'finale';
+const name = process.argv[2] || 'QABotfin2', tag = process.argv[3] || 'finale';
 const ALT = { x: -4231, y: 65, z: 3027 }; // objective target for tabernacle_objective_offerbook
 const stack = bot => bot.inventory.items().map(i => `${i.name}x${i.count}`).join(',');
 (async () => {

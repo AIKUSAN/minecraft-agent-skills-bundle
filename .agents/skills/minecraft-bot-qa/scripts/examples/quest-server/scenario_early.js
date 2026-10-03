@@ -2,7 +2,7 @@
 const { connect, sleep, inv, setupNav } = require('../../java/lib');
 const { converse } = require('../../java/dialogue');
 const { affirm } = require('../../java/strategies');
-const name = process.argv[2] || 'LOPQAe1';
+const name = process.argv[2] || 'QABote1';
 const tag = process.argv[3] || 'early';
 const npcs = (process.argv[4] || 'Moses,Wheat Farmer,Livestock Farmer').split(',');
 (async () => {

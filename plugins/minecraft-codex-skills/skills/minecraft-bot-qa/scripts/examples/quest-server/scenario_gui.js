@@ -6,7 +6,7 @@ const titleText = t => { try { const j = typeof t === 'string' ? JSON.parse(t) :
 (async () => {
   const bot = connect({ name, tag });
   const events = []; let marks = 0;
-  bot.on('messagestr', m => { const s = strip(m); if (s && !/^LOPQA\w+ (joined|left)/.test(s)) events.push({ k: 'chat', v: s.slice(-220) }); });
+  bot.on('messagestr', m => { const s = strip(m); if (s && !/^QABot\w+ (joined|left)/.test(s)) events.push({ k: 'chat', v: s.slice(-220) }); });
   bot.on('windowOpen', w => events.push({ k: 'open', v: titleText(w.title), type: w.type, id: w.id }));
   bot.on('windowClose', w => events.push({ k: 'close' }));
   const results = [];

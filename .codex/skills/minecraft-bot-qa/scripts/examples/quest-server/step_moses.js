@@ -1,6 +1,6 @@
 const { connect, sleep, inv, setupNav } = require('../../java/lib');
 const { converse } = require('../../java/dialogue');
-const name = process.argv[2] || 'LOPQAm1';
+const name = process.argv[2] || 'QABotm1';
 const pickArg = (process.argv[3] || '0').split(',').map(x => x === 'c' ? 'continue' : parseInt(x, 10));
 (async () => {
   const bot = connect({ name, tag: 'moses-open' });

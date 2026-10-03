@@ -1,7 +1,7 @@
 // Craft bread from the three granted wheat at the tabernacle crafting table, then offer it at the show-bread table.
 const { connect, sleep, inv, setupNav, walkTo } = require('../../java/lib');
 const { Vec3 } = require('vec3');
-const name = process.argv[2] || 'LOPQAs1', tag = process.argv[3] || 'bread';
+const name = process.argv[2] || 'QABots1', tag = process.argv[3] || 'bread';
 const C = new Vec3(-4224, 71, 3044);
 (async () => {
   const bot = connect({ name, tag }); setupNav(bot);

@@ -1,5 +1,5 @@
 const { connect, sleep, inv } = require('../../java/lib');
-const name = process.argv[2] || 'LOPQAfin';
+const name = process.argv[2] || 'QABotfin';
 (async () => {
   const bot = connect({ name, tag: 'writebook-raw' });
   bot.once('spawn', async () => {

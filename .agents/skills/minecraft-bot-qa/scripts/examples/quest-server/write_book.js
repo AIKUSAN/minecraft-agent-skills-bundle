@@ -1,6 +1,6 @@
 // Writes and signs the marked prayer book like a player would (book and quill -> signed book).
 const { connect, sleep, inv } = require('../../java/lib');
-const name = process.argv[2] || 'LOPQAfin', tag = process.argv[3] || 'writebook';
+const name = process.argv[2] || 'QABotfin', tag = process.argv[3] || 'writebook';
 (async () => {
   const bot = connect({ name, tag });
   bot.once('spawn', async () => {

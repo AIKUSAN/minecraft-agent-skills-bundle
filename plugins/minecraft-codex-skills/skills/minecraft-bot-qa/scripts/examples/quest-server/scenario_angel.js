@@ -2,7 +2,7 @@
 const { connect, sleep, inv, setupNav, walkTo } = require('../../java/lib');
 const { converse } = require('../../java/dialogue');
 const { affirm } = require('../../java/strategies');
-const name = process.argv[2] || 'LOPQAfin', tag = process.argv[3] || 'angel';
+const name = process.argv[2] || 'QABotfin', tag = process.argv[3] || 'angel';
 (async () => {
   const bot = connect({ name, tag }); setupNav(bot);
   bot.once('spawn', async () => {
