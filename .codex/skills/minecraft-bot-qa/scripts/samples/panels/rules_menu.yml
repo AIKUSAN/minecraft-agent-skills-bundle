@@ -1,0 +1,24 @@
+title: Server Rules
+subtitle: Be kind, play fair, and respect every builder.
+layout:
+  0: [respect, build]
+  1: [back]
+items:
+  respect:
+    material: PAPER
+    name: Respect Everyone
+    actions:
+      commands:
+        - "[msg] Be kind and respectful to every player."
+  build:
+    material: GRASS_BLOCK
+    name: Protect Builds
+    actions:
+      commands:
+        - "[msg] Do not grief or damage other builds."
+  back:
+    material: ARROW
+    name: Back
+    actions:
+      commands:
+        - "[open] main_menu"

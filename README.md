@@ -92,7 +92,7 @@ and routing docs are written to support delegation when the runtime provides it.
 | Server and mod development | `minecraft-plugin-dev`, `minecraft-modding`, `minecraft-multiloader`, `minecraft-bedrock-addon-dev` |
 | Vanilla and content systems | `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation` |
 | Resource packs and conversion | `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen` |
-| Quality and release | `minecraft-testing`, `minecraft-ci-release` |
+| Quality and release | `minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release` |
 
 ## Skills Catalog
 
@@ -115,6 +115,7 @@ and routing docs are written to support delegation when the runtime provides it.
 | `minecraft-resource-pack-conversion` | Java-to-Bedrock resource-pack conversion with `.mcpack` output and unsupported asset reports |
 | `minecraft-imagegen` | Pack icons, server banners, promo images, concept textures, thumbnails, and visual briefs |
 | `minecraft-testing` | JUnit 5, MockBukkit, GameTests, fixtures, CI checks, and regression test planning |
+| `minecraft-bot-qa` | Bot playthroughs of a live dev server on Java (Mineflayer) and Bedrock (bedrock-protocol via Geyser), NPC and menu walkthroughs, structured logs, and judge reports with an optional Laya second opinion |
 | `minecraft-ci-release` | GitHub Actions, Modrinth and CurseForge publishing, release notes, versioning, and artifact checks |
 
 ## Example Prompts

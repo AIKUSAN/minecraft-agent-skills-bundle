@@ -32,3 +32,10 @@ Thumbs.db
 !/.codex/**
 !/.claude/
 !/.claude/**
+
+# Bot QA runtime output
+.bot-qa/
+qa-output/
+auth-cache*/
+__pycache__/
+*.pyc

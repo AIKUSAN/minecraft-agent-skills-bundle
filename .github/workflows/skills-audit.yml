@@ -56,6 +56,9 @@ jobs:
       - name: Validate GitHub community files
         run: node ./scripts/check-github-community-files.mjs
 
+      - name: Check bot QA kit (static)
+        run: npm run check:bot-kit
+
       - name: Run markdown lint
         run: npm run lint:md
 

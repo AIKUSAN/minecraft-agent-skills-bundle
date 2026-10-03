@@ -1,6 +1,6 @@
 # AGENTS.md — minecraft-agent-skills-bundle Repository
 
-This repository is a collection of **18 AI agent skills**: 17 Minecraft
+This repository is a collection of **19 AI agent skills**: 18 Minecraft
 development/operations skills plus one Minecraft image-generation skill, along
 with a dual-target plugin bundle for Codex and Claude Code.
 It is NOT itself a Minecraft project — it contains skill files and plugin packaging
@@ -36,6 +36,8 @@ other skills in this repo also include `references/` and `scripts/` support asse
 ├── minecraft-testing/
 │   └── SKILL.md
 ├── minecraft-ci-release/
+│   └── SKILL.md
+├── minecraft-bot-qa/
 │   └── SKILL.md
 ├── minecraft-world-generation/
 │   └── SKILL.md
@@ -106,6 +108,8 @@ Compatibility mirror (kept in sync by script/CI):
 │   └── SKILL.md
 ├── minecraft-ci-release/         ← GitHub Actions, Modrinth/CurseForge publishing
 │   └── SKILL.md
+├── minecraft-bot-qa/             ← Java + Bedrock bot playthrough QA, Laya second opinion
+│   └── SKILL.md
 ├── minecraft-world-generation/   ← Custom biomes, dimensions, structures
 │   └── SKILL.md
 ├── minecraft-resource-pack/      ← Textures, models, sounds, shaders
@@ -173,6 +177,8 @@ Claude Code mirror (kept in sync by script/CI):
 │   └── SKILL.md
 ├── minecraft-ci-release/         ← GitHub Actions, Modrinth/CurseForge publishing
 │   └── SKILL.md
+├── minecraft-bot-qa/             ← Java + Bedrock bot playthrough QA, Laya second opinion
+│   └── SKILL.md
 ├── minecraft-world-generation/   ← Custom biomes, dimensions, structures
 │   └── SKILL.md
 ├── minecraft-resource-pack/      ← Textures, models, sounds, shaders
@@ -228,6 +234,7 @@ plugins/minecraft-codex-skills/
     ├── minecraft-multiloader/
     ├── minecraft-testing/
     ├── minecraft-ci-release/
+    ├── minecraft-bot-qa/
     ├── minecraft-world-generation/
     ├── minecraft-resource-pack/
     ├── minecraft-resource-pack-conversion/
@@ -255,6 +262,7 @@ The table below maps task types to which skill(s) to load:
 |Single code base targeting both NeoForge and Fabric|`minecraft-multiloader`|
 |Unit tests, MockBukkit, NeoForge GameTests, Fabric GameTests|`minecraft-testing`|
 |GitHub Actions CI, Modrinth/CurseForge auto-publish, semantic versioning|`minecraft-ci-release`|
+|Bot playthroughs of a live dev server (Java and Bedrock), menu and NPC walkthroughs, judge reports|`minecraft-bot-qa`|
 |Custom biomes, dimensions, structures (datapack or mod)|`minecraft-world-generation`|
 |Texture packs, block/item models, animated textures, shaders|`minecraft-resource-pack`|
 |Convert Java resource packs into Bedrock `.mcpack` files|`minecraft-resource-pack-conversion`|
@@ -299,6 +307,7 @@ When Minecraft releases a new version, update the following files:
 15. **`minecraft-multiloader/SKILL.md`** — Architectury, Fabric loader, NeoForge versions
 16. **`minecraft-worldedit-ops/SKILL.md`** — command workflow or safety behavior changes
 17. **`minecraft-essentials-ops/SKILL.md`** — EssentialsX command/config/permission behavior changes
+18. **`minecraft-bot-qa/SKILL.md`** — bot library versions (mineflayer, bedrock-protocol, Laya), Node requirement, and Geyser behavior notes
 
 ## Repo Notes
 

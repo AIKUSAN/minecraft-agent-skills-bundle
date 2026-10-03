@@ -28,7 +28,7 @@ plugins/minecraft-codex-skills/
 | Server and mod development | `minecraft-plugin-dev`, `minecraft-modding`, `minecraft-multiloader`, `minecraft-bedrock-addon-dev` |
 | Vanilla and content systems | `minecraft-datapack`, `minecraft-commands-scripting`, `minecraft-world-generation` |
 | Resource packs and conversion | `minecraft-resource-pack`, `minecraft-resource-pack-conversion`, `minecraft-imagegen` |
-| Quality and release | `minecraft-testing`, `minecraft-ci-release` |
+| Quality and release | `minecraft-testing`, `minecraft-bot-qa`, `minecraft-ci-release` |
 
 `minecraft-imagegen` is host-conditional. Codex supports image generation
 directly; other hosts should only route that skill when an equivalent image tool
